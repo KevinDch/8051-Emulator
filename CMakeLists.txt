@@ -44,6 +44,7 @@ add_library(${PROJECT_NAME}
         src/framwork/debug.cpp          src/include/debug.h
 
         src/emulator/ihxstream.cpp      src/include/ihxstream.h
+        src/emulator/memory.cpp         src/include/memory.h
         )
 target_include_directories(${PROJECT_NAME} PUBLIC src/include)
 target_link_libraries(${PROJECT_NAME} PUBLIC ${EXTERNAL_LIBRARIES})

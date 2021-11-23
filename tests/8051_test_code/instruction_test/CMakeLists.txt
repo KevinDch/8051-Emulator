@@ -16,7 +16,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY      "${PROJECT_BIN_ROOT}/ihx_output")
 project(8051_test_code ASM)
 
 set(INSTRUCTION_LIST
-        nop
+        nop mov movc movx
         )
 
 foreach( INSTRUCTION ${INSTRUCTION_LIST} )

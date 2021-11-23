@@ -1,0 +1,23 @@
+.area HOME (CODE)
+.area XSEG (CODE)
+.area PSEG (CODE)
+.area XRAM (CODE)
+
+MOV 0x7F, #0xFF
+
+MOV R0, #0x45
+MOV R1, #0x46
+MOV A,  #0x90
+MOV DPTR, #0x4545
+
+MOVX @R0, A
+MOVX @R1, A
+
+MOVX @DPTR, A
+
+MOVX A, @R0
+MOVX A, @R1
+
+MOVX A, @DPTR
+
+MOV 0x7F, #0x00

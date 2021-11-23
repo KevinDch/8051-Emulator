@@ -110,13 +110,13 @@ void ihxstream::fill_64bit_program_stack()
 {
     for (auto line : program)
     {
-        std::unique_ptr < uint8_t > tmp (new uint8_t [ line.second.size() ]);
+        std::unique_ptr < uint8_t[] > tmp (new uint8_t [ line.second.size() ]);
 
         for (uint64_t i = 0; i < line.second.size(); i++)
         {
-            tmp.operator->()[i] = line.second[i];
+            tmp[i] = line.second[i];
         }
 
-        memcpy(_64bit_program_stack + line.first, tmp.operator->(), line.second.size());
+        memcpy(_64bit_program_stack + line.first, tmp.get(), line.second.size());
     }
 }
