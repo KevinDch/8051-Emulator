@@ -1,5 +1,5 @@
-#ifndef MSGMAP_ERROR_H
-#define MSGMAP_ERROR_H
+#ifndef C51_EMU_DEBUG_H
+#define C51_EMU_DEBUG_H
 
 /** @file
  *
@@ -103,4 +103,4 @@ std::string __current_time();
 
 #endif // CMAKE_BUILD_DEBUG
 
-#endif //MSGMAP_ERROR_H
+#endif //C51_EMU_DEBUG_H

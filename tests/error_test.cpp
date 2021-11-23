@@ -1,4 +1,4 @@
-#include <msgmap_error.h>
+#include <emu_error.h>
 #include <iostream>
 
 /** @file
@@ -10,7 +10,7 @@
 int main()
 {
     try {
-        throw msgmap_error_t(MSGMAP_EXT_LIB_ERR);
+        throw emu_error_t(0);
     }
     catch (std::exception & err)
     {

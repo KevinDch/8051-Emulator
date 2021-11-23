@@ -19,6 +19,16 @@ function(default_definition DEFINITION DEFAULT_VAL)
     endif()
 endfunction()
 
+function(default_marco DEFINITION DEFAULT_VAL)
+    # if definition not predefined
+    if ("X${${DEFINITION}}" STREQUAL "X")
+        set(${DEFINITION} ${DEFAULT_VAL} PARENT_SCOPE)
+        set(${DEFINITION} ${DEFAULT_VAL})
+    endif()
+
+    message("`${DEFINITION}` is set to `${${DEFINITION}}`")
+endfunction()
+
 function(add_ext_lib LIBNAME SOURCE_FILE_VAL_NAME)
     message("External library `${LIBNAME}` added")
     add_library(${LIBNAME} STATIC ${SOURCE_FILE_VAL_NAME})

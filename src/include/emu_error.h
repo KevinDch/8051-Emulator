@@ -1,5 +1,5 @@
-#ifndef MSGMAP_ERROR_H
-#define MSGMAP_ERROR_H
+#ifndef C51_EMU_ERROR_H
+#define C51_EMU_ERROR_H
 
 /** @file
  *
@@ -10,10 +10,11 @@
 #include <utility>
 #include <cstring>
 
-#define MSGMAP_EXT_LIB_ERR      0xA0000001      /* External library error */
+#define C51_EMU_IHXSTREAMN_ABORT    0x00000001      /* IHX stream aborted */
+#define C51_EMU_IHX_FILE_CORRUPT    0x00000002      /* IHX file corrupted */
 
 /// Filesystem Error Type
-class msgmap_error_t : public std::exception
+class emu_error_t : public std::exception
 {
 private:
     uint32_t error_code;
@@ -22,7 +23,7 @@ private:
 public:
     /// Generate a error with error code
     /** @param _code Your error code **/
-    explicit msgmap_error_t(unsigned int _code) noexcept : error_code(_code), _errno(errno) {}
+    explicit emu_error_t(unsigned int _code) noexcept : error_code(_code), _errno(errno) {}
 
     /// Return explanation of current error
     [[nodiscard]] const char * what() const noexcept override;
@@ -37,4 +38,4 @@ public:
     [[nodiscard]] unsigned int my_errcode() const noexcept { return error_code; }
 };
 
-#endif //MSGMAP_ERROR_H
+#endif //C51_EMU_ERROR_H

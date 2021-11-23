@@ -1,15 +1,16 @@
 cmake_minimum_required(VERSION 3.20)
 
-set(PROJECT_NAME "CMake_Template")
+set(PROJECT_NAME "C51_emu")
 set(PROJECT_VERSION "0.0.1")
 
 project(${PROJECT_NAME})
 
 set(EXTERNAL_LIBRARIES "")
-
+set(PROJECT_SRC_ROOT ${PROJECT_SOURCE_DIR})
+set(PROJECT_BIN_ROOT ${PROJECT_BINARY_DIR})
 set(CMAKE_CXX_STANDARD 20)
 
-include(modules/func_def.cmake)
+include(CMake_Modules/func_def.cmake)
 
 if ("X${CMAKE_BUILD_TYPE}" STREQUAL "XDebug")
     add_compile_definitions(CMAKE_BUILD_DEBUG=1)
@@ -18,10 +19,17 @@ endif()
 add_compile_definitions("_FILE_OFFSET_BITS=64")
 add_compile_definitions("PACKAGE_NAME=\"${PROJECT_NAME}\"")
 add_compile_definitions("PACKAGE_VERSION=\"${PROJECT_VERSION}\"")
+add_compile_definitions("COMPILED_WITH_SDCC=1")
+add_compile_definitions("PROJECT_BINARY_DIR=\"${PROJECT_BINARY_DIR}\"")
 
 # default definitions
 string(TOUPPER ${PROJECT_NAME} MARCO_PREFIX)
 default_definition(${MARCO_PREFIX}_PREFIX "\"(${PROJECT_NAME}) \"")
+
+# SDCC Executables
+default_marco(SDCC_EXEC         "sdcc-sdcc")
+default_marco(SDCC_ASM_EXEC     "sdcc-sdas8051")
+default_marco(SDCC_ASM_FLAG     "-plogsff")
 
 # add external library
 #set(SHA256SUM_SRC_FILES "")
@@ -32,8 +40,10 @@ default_definition(${MARCO_PREFIX}_PREFIX "\"(${PROJECT_NAME}) \"")
 
 # STEMPFS Static Library
 add_library(${PROJECT_NAME}
-        src/msgmap_error.cpp    src/include/msgmap_error.h
-        src/debug.cpp           src/include/debug.h
+        src/framwork/emu_error.cpp      src/include/emu_error.h
+        src/framwork/debug.cpp          src/include/debug.h
+
+        src/emulator/ihxstream.cpp      src/include/ihxstream.h
         )
 target_include_directories(${PROJECT_NAME} PUBLIC src/include)
 target_link_libraries(${PROJECT_NAME} PUBLIC ${EXTERNAL_LIBRARIES})
@@ -42,4 +52,11 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${EXTERNAL_LIBRARIES})
 if ("X${CMAKE_BUILD_TYPE}" STREQUAL "XDebug")
     _add_test(error       "Error test")
     _add_test(debug       "Debug test")
+    _add_test(ihxstream   "Test for IHX data stream class")
 endif()
+
+# 8051 test code
+add_subdirectory(tests/8051_test_code)
+
+# dependencies
+set_property(TEST UT_ihxstream APPEND PROPERTY DEPENDS nop)
