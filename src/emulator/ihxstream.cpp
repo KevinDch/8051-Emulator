@@ -1,6 +1,7 @@
 #include <ihxstream.h>
 #include <emu_error.h>
 #include <memory>
+#include <debug.h>
 
 #define IHX_START_CODE ':'
 
@@ -50,11 +51,12 @@ std::map < uint16_t, std::vector < uint8_t > > ihxstream::readline()
     address = strtol(lit_address, nullptr, 16);
     record_type = strtol(lit_record_type, nullptr, 16);
 
-    char address_split_1[3] {}, address_split_2[3] {};
-    memcpy(address_split_1, lit_address, 2);
-    memcpy(address_split_1, lit_address + 2, 2);
-    address_split[0] = strtol(address_split_1, nullptr, 16);
-    address_split[1] = strtol(address_split_2, nullptr, 16);
+#ifdef COMPILED_WITH_SDCC
+    address -= 1;
+#endif // COMPILED_WITH_SDCC
+
+    address_split[0] = address;
+    address_split[1] = address >> 8;
 
     // read data
     for (uint64_t i = 0; i < byte_count * 2; i++)
@@ -90,10 +92,10 @@ std::map < uint16_t, std::vector < uint8_t > > ihxstream::readline()
     }
 
     uint8_t cmp_of_checksum = byte_count + address_split[0] + address_split[1] + record_type;
-
-#ifdef COMPILED_WITH_SDCC
-    cmp_of_checksum -= 1;
-#endif // COMPILED_WITH_SDCC
+    for (auto i : data)
+    {
+        cmp_of_checksum += i;
+    }
 
     if ((uint8_t)checksum != (uint8_t)(~cmp_of_checksum))
     {
@@ -110,13 +112,9 @@ void ihxstream::fill_64bit_program_stack()
 {
     for (auto line : program)
     {
-        std::unique_ptr < uint8_t[] > tmp (new uint8_t [ line.second.size() ]);
-
         for (uint64_t i = 0; i < line.second.size(); i++)
         {
-            tmp[i] = line.second[i];
+            (_64bit_program_stack + line.first)[i] = line.second[i];
         }
-
-        memcpy(_64bit_program_stack + line.first, tmp.get(), line.second.size());
     }
 }

@@ -12,6 +12,20 @@ function(_add_test TEST DESCRIPTION)
     message("Unit test `${TEST_NAME}`\t(${DESCRIPTION}) enabled")
 endfunction()
 
+function(c51_add_test CATALOG TEST DESCRIPTION)
+    set(TEST_NAME "UT_${TEST}")
+
+    add_executable(${TEST_NAME} "tests/${CATALOG}/${TEST}_test.cpp")
+    target_link_libraries(${TEST_NAME} PUBLIC ${PROJECT_NAME} ${EXTERNAL_LIBRARIES})
+    target_include_directories(${TEST_NAME} PUBLIC src/include)
+
+    add_test(NAME ${TEST_NAME}
+            COMMAND ${TEST_NAME}
+            WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+
+    message("Unit test ${CATALOG}/`${TEST_NAME}`\t(${DESCRIPTION}) enabled")
+endfunction()
+
 function(default_definition DEFINITION DEFAULT_VAL)
     # if definition not predefined
     if ("X${${DEFINITION}}" STREQUAL "X")

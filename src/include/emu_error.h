@@ -9,6 +9,7 @@
 #include <string>
 #include <utility>
 #include <cstring>
+#include <debug.h>
 
 #define C51_EMU_IHXSTREAMN_ABORT    0x00000001      /* IHX stream aborted */
 #define C51_EMU_IHX_FILE_CORRUPT    0x00000002      /* IHX file corrupted */
@@ -23,7 +24,11 @@ private:
 public:
     /// Generate a error with error code
     /** @param _code Your error code **/
-    explicit emu_error_t(unsigned int _code) noexcept : error_code(_code), _errno(errno) {}
+    explicit emu_error_t(unsigned int _code) noexcept : error_code(_code), _errno(errno)
+        {
+            FUNCTION_INFO;
+            OBTAIN_STACK_FRAME;
+        }
 
     /// Return explanation of current error
     [[nodiscard]] const char * what() const noexcept override;

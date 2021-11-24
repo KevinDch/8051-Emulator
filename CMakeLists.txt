@@ -39,25 +39,48 @@ default_marco(SDCC_ASM_FLAG     "-plogsff")
 #add_ext_lib(sha256sum ${SHA256SUM_SRC_FILES})
 
 # STEMPFS Static Library
-add_library(${PROJECT_NAME}
+add_library(${PROJECT_NAME} SHARED
         src/framwork/emu_error.cpp      src/include/emu_error.h
         src/framwork/debug.cpp          src/include/debug.h
 
         src/emulator/ihxstream.cpp      src/include/ihxstream.h
-        src/emulator/memory.cpp         src/include/memory.h
+        src/emulator/memory.cpp src/include/c51_memory.h
+        src/emulator/cpu.cpp            src/include/cpu.h
         )
 target_include_directories(${PROJECT_NAME} PUBLIC src/include)
 target_link_libraries(${PROJECT_NAME} PUBLIC ${EXTERNAL_LIBRARIES})
 
 # Unit tests
+enable_testing()
+
 if ("X${CMAKE_BUILD_TYPE}" STREQUAL "XDebug")
-    _add_test(error       "Error test")
-    _add_test(debug       "Debug test")
-    _add_test(ihxstream   "Test for IHX data stream class")
+
+    _add_test(error                 "Error test")
+    _add_test(debug                 "Debug test")
+    _add_test(ihxstream             "Test for IHX data stream class")
+
+    _add_test(c51_cpu_nop           "C51 CPU test for instruction nop")
+
+    c51_add_test(mov c51_cpu_mov_rn_data        "C51 CPU test for instruction MOV Rn, #data")
+    c51_add_test(mov c51_cpu_mov_a_rn           "C51 CPU test for instruction MOV A, Rn")
+    c51_add_test(mov c51_cpu_mov_rn_a           "C51 CPU test for instruction MOV Rn, A")
+    c51_add_test(mov c51_cpu_mov_a_data         "C51 CPU test for instruction MOV A, #data")
+    c51_add_test(mov c51_cpu_mov_a_direct       "C51 CPU test for instruction MOV A, direct")
+    c51_add_test(mov c51_cpu_mov_rn_direct      "C51 CPU test for instruction MOV Rn, direct")
+    c51_add_test(mov c51_cpu_mov_direct_a       "C51 CPU test for instruction MOV direct, A")
+    c51_add_test(mov c51_cpu_mov_direct_rn      "C51 CPU test for instruction MOV direct, Rn")
+    c51_add_test(mov c51_cpu_mov_direct_direct  "C51 CPU test for instruction MOV direct, direct")
+    c51_add_test(mov c51_cpu_mov_direct_data    "C51 CPU test for instruction MOV direct, #data")
+    c51_add_test(mov c51_cpu_mov_ri_data        "C51 CPU test for instruction MOV @Ri, #data")
+    c51_add_test(mov c51_cpu_mov_a_ri           "C51 CPU test for instruction MOV A, @Ri")
+    c51_add_test(mov c51_cpu_mov_ri_a           "C51 CPU test for instruction MOV @Ri, A")
+    c51_add_test(mov c51_cpu_mov_ri_direct      "C51 CPU test for instruction MOV @Ri, direct")
+    c51_add_test(mov c51_cpu_mov_direct_ri      "C51 CPU test for instruction MOV direct, @Ri")
+    c51_add_test(mov c51_cpu_mov_dptr_data16    "C51 CPU test for instruction MOV DPTR, #data16")
+    c51_add_test(mov c51_cpu_mov_c_bitaddr      "C51 CPU test for instruction MOV C, bitaddr")
+    c51_add_test(mov c51_cpu_mov_bitaddr_c      "C51 CPU test for instruction MOV bitaddr, C")
+
 endif()
 
 # 8051 test code
 add_subdirectory(tests/8051_test_code)
-
-# dependencies
-set_property(TEST UT_ihxstream APPEND PROPERTY DEPENDS nop)

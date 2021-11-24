@@ -16,13 +16,29 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY      "${PROJECT_BIN_ROOT}/ihx_output")
 project(8051_test_code ASM)
 
 set(INSTRUCTION_LIST
-        nop mov movc movx
+        nop
+        movc movx
         )
 
 foreach( INSTRUCTION ${INSTRUCTION_LIST} )
     add_executable(${INSTRUCTION} asm/${INSTRUCTION}.asm)
     message("Added sample program `${INSTRUCTION}`")
 endforeach()
+
+function(add_sub_ins CATALOG INS_LIST)
+    foreach( INSTRUCTION ${INS_LIST} )
+        add_executable(${INSTRUCTION} asm/${CATALOG}/${INSTRUCTION}.asm)
+        message("Added sample program ${CATALOG}/`${INSTRUCTION}`")
+    endforeach()
+endfunction()
+
+set(MOV_INS_LIST
+        mov_rn_data mov_a_rn mov_rn_a mov_a_data mov_a_direct mov_rn_direct
+        mov_direct_a mov_direct_rn mov_direct_direct mov_direct_data mov_ri_data
+        mov_a_ri mov_ri_a mov_ri_direct mov_direct_ri mov_dptr_data16 mov_c_bitaddr
+        mov_bitaddr_c
+        )
+add_sub_ins(mov "${MOV_INS_LIST}")
 
 unset(CMAKE_USER_MAKE_RULES_OVERRIDE_ASM)
 unset(CMAKE_C_COMPILER)

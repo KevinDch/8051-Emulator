@@ -1,0 +1,12 @@
+.area HOME (CODE)
+.area XSEG (CODE)
+.area PSEG (CODE)
+
+MOV R0, #0x16
+MOV R1, #0x17
+
+MOV 0x16, #0x18
+MOV 0x17, #0x19
+
+MOV 0x18, @R0
+MOV 0x19, @R1
