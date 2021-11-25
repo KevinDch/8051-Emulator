@@ -31,6 +31,7 @@ bool _8bit_get_bit(const uint8_t * addr, int bit_pos);
 class memory
 {
     uint8_t c51_memory [256]{};
+    uint8_t c51_xmemory [64 * 1024]{};
 
 public:
     /// get current register bank
@@ -38,6 +39,9 @@ public:
 
     /// locate memory
     [[nodiscard]] uint8_t * locate(uint8_t addr) { return c51_memory + addr; }
+
+    /// locate external memory
+    [[nodiscard]] uint8_t * locatex(uint16_t addr) { return c51_xmemory + addr; }
 
     /// locate bit by address
     /// @param bit_addr bit address

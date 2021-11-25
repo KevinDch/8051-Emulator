@@ -85,6 +85,9 @@ if ("X${CMAKE_BUILD_TYPE}" STREQUAL "XDebug")
     # MOVC
     c51_add_test(movc c51_cpu_movc_a_a_dptr     "C51 CPU test for instruction MOVC A, @A+DPTR")
     c51_add_test(movc c51_cpu_movc_a_a_pc       "C51 CPU test for instruction MOVC A, @A+PC")
+
+    # MOVX
+    c51_add_test(movx c51_cpu_movx_dptr_a       "C51 CPU test for instruction MOVC @DPTR, A")
 endif()
 
 # 8051 test code

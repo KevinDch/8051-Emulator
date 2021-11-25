@@ -551,6 +551,18 @@ uint8_t __movc_a_at_a_pc__ (c51_cpu & cpu, ...)
 
 ///////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////
+/// MOVC A, @A+PC
+///////////////////////////////////////////////////////////////
+
+uint8_t __movx_at_dptr_a__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.locatex(*cpu.c51_memory.DPTR) = *cpu.c51_memory.acc_A;
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+
 uint8_t instruction_arg_count(uint8_t instruction)
 {
     switch (instruction)
@@ -648,6 +660,7 @@ c51_cpu::c51_cpu(const std::string &filename) : ihx_file(filename)
 {
     __EMPLACE_OPERATION__(__NOP__, __nop__);
 
+
     __EMPLACE_OPERATION__(__MOV_R0_DATA__, __mov_r0_data__);
     __EMPLACE_OPERATION__(__MOV_R1_DATA__, __mov_r1_data__);
     __EMPLACE_OPERATION__(__MOV_R2_DATA__, __mov_r2_data__);
@@ -724,9 +737,13 @@ c51_cpu::c51_cpu(const std::string &filename) : ihx_file(filename)
 
     __EMPLACE_OPERATION__(__MOV_BITADDR_C__, __mov_bitaddr_c__);
 
+
     __EMPLACE_OPERATION__(__MOVC_A_AT_A_DPTR__, __movc_a_at_a_dptr__);
 
     __EMPLACE_OPERATION__(__MOVC_A_AT_A_PC__, __movc_a_at_a_pc__);
+
+
+    __EMPLACE_OPERATION__(__MOVX_AT_DPTR_A__, __movx_at_dptr_a__);
 }
 
 void c51_cpu::clock_invocation()

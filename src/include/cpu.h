@@ -87,6 +87,9 @@
 
 #define __MOVC_A_AT_A_PC__      0x83
 
+#define __MOVX_AT_DPTR_A__      0xF0
+
+
 class c51_cpu;
 
 typedef uint8_t (*ins_exec_t)(c51_cpu &, ...);

@@ -17,7 +17,6 @@ project(8051_test_code ASM)
 
 set(INSTRUCTION_LIST
         nop
-        movc movx
         )
 
 foreach( INSTRUCTION ${INSTRUCTION_LIST} )
@@ -44,6 +43,11 @@ set(MOVC_INS_LIST
         movc_a_a_dptr movc_a_a_pc
         )
 add_sub_ins(movc "${MOVC_INS_LIST}")
+
+set(MOVX_INS_LIST
+        movx_dptr_a
+        )
+add_sub_ins(movx "${MOVX_INS_LIST}")
 
 unset(CMAKE_USER_MAKE_RULES_OVERRIDE_ASM)
 unset(CMAKE_C_COMPILER)
