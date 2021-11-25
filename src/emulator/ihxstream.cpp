@@ -51,10 +51,6 @@ std::map < uint16_t, std::vector < uint8_t > > ihxstream::readline()
     address = strtol(lit_address, nullptr, 16);
     record_type = strtol(lit_record_type, nullptr, 16);
 
-#ifdef COMPILED_WITH_SDCC
-    address -= 1;
-#endif // COMPILED_WITH_SDCC
-
     address_split[0] = address;
     address_split[1] = address >> 8;
 
@@ -97,10 +93,12 @@ std::map < uint16_t, std::vector < uint8_t > > ihxstream::readline()
         cmp_of_checksum += i;
     }
 
+#ifdef __ENABLE_IHX_CHECKSUM__
     if ((uint8_t)checksum != (uint8_t)(~cmp_of_checksum))
     {
         throw emu_error_t(C51_EMU_IHX_FILE_CORRUPT);
     }
+#endif // __ENABLE_IHX_CHECKSUM__
 
     // return result
     std::map < uint16_t, std::vector < uint8_t > > ret;
@@ -116,5 +114,17 @@ void ihxstream::fill_64bit_program_stack()
         {
             (_64bit_program_stack + line.first)[i] = line.second[i];
         }
+    }
+}
+
+uint16_t ihxstream::get_pc() const
+{
+    if (auto_accel)
+    {
+        return read_offset - 1;
+    }
+    else
+    {
+        return read_offset;
     }
 }

@@ -20,6 +20,7 @@ private:
     uint8_t _64bit_program_stack [1024 * 64] { };
 
     uint32_t read_offset = 0;
+    bool auto_accel = false;
 
     /// read a single line of IHX file
     /// @return data of that line, converted, with address attached
@@ -35,14 +36,26 @@ public:
     explicit ihxstream(const std::string & filename);
 
     /// @return return next char in data pool, offset recorded
-    uint8_t next() { return _64bit_program_stack[read_offset++]; }
+    uint8_t next()
+        {   auto_accel = true;
+            return _64bit_program_stack[read_offset++];
+        }
 
     /// same as next, but in stream mode
     ihxstream & operator >>(uint8_t& ret) { ret = next(); return *this; }
 
     /// reset read offset
     /// @param new_offset new offset
-    void reset(uint32_t new_offset = 0) { read_offset = new_offset; }
+    void reset(uint32_t new_offset = 0)
+        {   read_offset = new_offset;
+            auto_accel = false;
+        }
+
+    /// get code memory
+    [[nodiscard]] uint8_t get_code(uint16_t addr) const { return _64bit_program_stack[addr]; }
+
+    /// get program counter
+    [[nodiscard]] uint16_t get_pc() const;
 };
 
 #endif //C51_EMU_IHXSTREAM_H

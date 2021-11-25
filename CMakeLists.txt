@@ -59,8 +59,10 @@ if ("X${CMAKE_BUILD_TYPE}" STREQUAL "XDebug")
     _add_test(debug                 "Debug test")
     _add_test(ihxstream             "Test for IHX data stream class")
 
+    # NOP
     _add_test(c51_cpu_nop           "C51 CPU test for instruction nop")
 
+    # MOV
     c51_add_test(mov c51_cpu_mov_rn_data        "C51 CPU test for instruction MOV Rn, #data")
     c51_add_test(mov c51_cpu_mov_a_rn           "C51 CPU test for instruction MOV A, Rn")
     c51_add_test(mov c51_cpu_mov_rn_a           "C51 CPU test for instruction MOV Rn, A")
@@ -80,6 +82,9 @@ if ("X${CMAKE_BUILD_TYPE}" STREQUAL "XDebug")
     c51_add_test(mov c51_cpu_mov_c_bitaddr      "C51 CPU test for instruction MOV C, bitaddr")
     c51_add_test(mov c51_cpu_mov_bitaddr_c      "C51 CPU test for instruction MOV bitaddr, C")
 
+    # MOVC
+    c51_add_test(movc c51_cpu_movc_a_a_dptr     "C51 CPU test for instruction MOVC A, @A+DPTR")
+    c51_add_test(movc c51_cpu_movc_a_a_pc       "C51 CPU test for instruction MOVC A, @A+PC")
 endif()
 
 # 8051 test code

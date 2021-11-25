@@ -40,6 +40,11 @@ set(MOV_INS_LIST
         )
 add_sub_ins(mov "${MOV_INS_LIST}")
 
+set(MOVC_INS_LIST
+        movc_a_a_dptr movc_a_a_pc
+        )
+add_sub_ins(movc "${MOVC_INS_LIST}")
+
 unset(CMAKE_USER_MAKE_RULES_OVERRIDE_ASM)
 unset(CMAKE_C_COMPILER)
 unset(CMAKE_ASM_COMPILER)

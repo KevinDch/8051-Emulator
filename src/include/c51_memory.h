@@ -33,10 +33,20 @@ class memory
     uint8_t c51_memory [256]{};
 
 public:
+    /// get current register bank
     [[nodiscard]] uint8_t * current_bank() const;
+
+    /// locate memory
     [[nodiscard]] uint8_t * locate(uint8_t addr) { return c51_memory + addr; }
 
+    /// locate bit by address
+    /// @param bit_addr bit address
+    /// @return bit result
     bool bit_access(uint8_t bit_addr);
+
+    /// modify bit by address
+    /// @param bit_addr bit address
+    /// @param val value that bit address
     void bit_modify(uint8_t bit_addr, bool val);
 
     uint8_t * register_bank_0 = __8BIT_ADDR_RELOCATE__(0x00);    // 00H - 07H

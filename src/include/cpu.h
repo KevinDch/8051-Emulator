@@ -83,9 +83,13 @@
 
 #define __MOV_BITADDR_C__       0x92
 
+#define __MOVC_A_AT_A_DPTR__    0x93
+
+#define __MOVC_A_AT_A_PC__      0x83
+
 class c51_cpu;
 
-typedef uint8_t (*ins_exec_t)(memory &, ...);
+typedef uint8_t (*ins_exec_t)(c51_cpu &, ...);
 typedef void (*by_exec_t)(uint8_t instruction, c51_cpu*, ...);
 
 class c51_cpu
@@ -101,9 +105,15 @@ private:
 public:
     memory c51_memory;
 
+    /// get code memory
+    [[nodiscard]] uint8_t get_code(uint16_t code_addr) const { return ihx_file.get_code(code_addr); }
+
+    /// get program counter
+    [[nodiscard]] uint16_t get_pc() const { return ihx_file.get_pc(); }
+
     explicit c51_cpu(const std::string & filename);
 
-    uint8_t exec(by_exec_t before_exec = nullptr,
+    uint64_t exec(by_exec_t before_exec = nullptr,
                  by_exec_t after_exec = nullptr);
 };
 

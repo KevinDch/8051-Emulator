@@ -22,76 +22,78 @@
 /// NOP
 ///////////////////////////////////////////////////////////////
 
-uint8_t __nop__ (memory & c51_memory, ...)
+uint8_t __nop__ (c51_cpu & cpu, ...)
 {
     return 1;
 }
+
+///////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////
 /// MOV Rn, #data
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_r0_data__ (memory & c51_memory, ...)
+uint8_t __mov_r0_data__ (c51_cpu & cpu, ...)
 {
     uint8_t data;
     __GET_ARGUMENT__(data);
-    c51_memory.current_bank()[R0] = data;
+    cpu.c51_memory.current_bank()[R0] = data;
     return 1;
 }
 
-uint8_t __mov_r1_data__ (memory & c51_memory, ...)
+uint8_t __mov_r1_data__ (c51_cpu & cpu, ...)
 {
     uint8_t data;
     __GET_ARGUMENT__(data);
-    c51_memory.current_bank()[R1] = data;
+    cpu.c51_memory.current_bank()[R1] = data;
     return 1;
 }
 
-uint8_t __mov_r2_data__ (memory & c51_memory, ...)
+uint8_t __mov_r2_data__ (c51_cpu & cpu, ...)
 {
     uint8_t data;
     __GET_ARGUMENT__(data);
-    c51_memory.current_bank()[R2] = data;
+    cpu.c51_memory.current_bank()[R2] = data;
     return 1;
 }
 
-uint8_t __mov_r3_data__ (memory & c51_memory, ...)
+uint8_t __mov_r3_data__ (c51_cpu & cpu, ...)
 {
     uint8_t data;
     __GET_ARGUMENT__(data);
-    c51_memory.current_bank()[R3] = data;
+    cpu.c51_memory.current_bank()[R3] = data;
     return 1;
 }
 
-uint8_t __mov_r4_data__ (memory & c51_memory, ...)
+uint8_t __mov_r4_data__ (c51_cpu & cpu, ...)
 {
     uint8_t data;
     __GET_ARGUMENT__(data);
-    c51_memory.current_bank()[R4] = data;
+    cpu.c51_memory.current_bank()[R4] = data;
     return 1;
 }
 
-uint8_t __mov_r5_data__ (memory & c51_memory, ...)
+uint8_t __mov_r5_data__ (c51_cpu & cpu, ...)
 {
     uint8_t data;
     __GET_ARGUMENT__(data);
-    c51_memory.current_bank()[R5] = data;
+    cpu.c51_memory.current_bank()[R5] = data;
     return 1;
 }
 
-uint8_t __mov_r6_data__ (memory & c51_memory, ...)
+uint8_t __mov_r6_data__ (c51_cpu & cpu, ...)
 {
     uint8_t data;
     __GET_ARGUMENT__(data);
-    c51_memory.current_bank()[R6] = data;
+    cpu.c51_memory.current_bank()[R6] = data;
     return 1;
 }
 
-uint8_t __mov_r7_data__ (memory & c51_memory, ...)
+uint8_t __mov_r7_data__ (c51_cpu & cpu, ...)
 {
     uint8_t data;
     __GET_ARGUMENT__(data);
-    c51_memory.current_bank()[R7] = data;
+    cpu.c51_memory.current_bank()[R7] = data;
     return 1;
 }
 
@@ -99,51 +101,51 @@ uint8_t __mov_r7_data__ (memory & c51_memory, ...)
 /// MOV A, Rn
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_a_r0__ (memory & c51_memory, ...)
+uint8_t __mov_a_r0__ (c51_cpu & cpu, ...)
 {
-    *c51_memory.acc_A = c51_memory.current_bank()[R0];
+    *cpu.c51_memory.acc_A = cpu.c51_memory.current_bank()[R0];
     return 1;
 }
 
-uint8_t __mov_a_r1__ (memory & c51_memory, ...)
+uint8_t __mov_a_r1__ (c51_cpu & cpu, ...)
 {
-    *c51_memory.acc_A = c51_memory.current_bank()[R1];
+    *cpu.c51_memory.acc_A = cpu.c51_memory.current_bank()[R1];
     return 1;
 }
 
-uint8_t __mov_a_r2__ (memory & c51_memory, ...)
+uint8_t __mov_a_r2__ (c51_cpu & cpu, ...)
 {
-    *c51_memory.acc_A = c51_memory.current_bank()[R2];
+    *cpu.c51_memory.acc_A = cpu.c51_memory.current_bank()[R2];
     return 1;
 }
 
-uint8_t __mov_a_r3__ (memory & c51_memory, ...)
+uint8_t __mov_a_r3__ (c51_cpu & cpu, ...)
 {
-    *c51_memory.acc_A = c51_memory.current_bank()[R3];
+    *cpu.c51_memory.acc_A = cpu.c51_memory.current_bank()[R3];
     return 1;
 }
 
-uint8_t __mov_a_r4__ (memory & c51_memory, ...)
+uint8_t __mov_a_r4__ (c51_cpu & cpu, ...)
 {
-    *c51_memory.acc_A = c51_memory.current_bank()[R4];
+    *cpu.c51_memory.acc_A = cpu.c51_memory.current_bank()[R4];
     return 1;
 }
 
-uint8_t __mov_a_r5__ (memory & c51_memory, ...)
+uint8_t __mov_a_r5__ (c51_cpu & cpu, ...)
 {
-    *c51_memory.acc_A = c51_memory.current_bank()[R5];
+    *cpu.c51_memory.acc_A = cpu.c51_memory.current_bank()[R5];
     return 1;
 }
 
-uint8_t __mov_a_r6__ (memory & c51_memory, ...)
+uint8_t __mov_a_r6__ (c51_cpu & cpu, ...)
 {
-    *c51_memory.acc_A = c51_memory.current_bank()[R6];
+    *cpu.c51_memory.acc_A = cpu.c51_memory.current_bank()[R6];
     return 1;
 }
 
-uint8_t __mov_a_r7__ (memory & c51_memory, ...)
+uint8_t __mov_a_r7__ (c51_cpu & cpu, ...)
 {
-    *c51_memory.acc_A = c51_memory.current_bank()[R7];
+    *cpu.c51_memory.acc_A = cpu.c51_memory.current_bank()[R7];
     return 1;
 }
 
@@ -151,51 +153,51 @@ uint8_t __mov_a_r7__ (memory & c51_memory, ...)
 /// MOV Rn, A
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_r0_a__ (memory & c51_memory, ...)
+uint8_t __mov_r0_a__ (c51_cpu & cpu, ...)
 {
-    c51_memory.current_bank()[R0] = *c51_memory.acc_A;
+    cpu.c51_memory.current_bank()[R0] = *cpu.c51_memory.acc_A;
     return 1;
 }
 
-uint8_t __mov_r1_a__ (memory & c51_memory, ...)
+uint8_t __mov_r1_a__ (c51_cpu & cpu, ...)
 {
-    c51_memory.current_bank()[R1] = *c51_memory.acc_A;
+    cpu.c51_memory.current_bank()[R1] = *cpu.c51_memory.acc_A;
     return 1;
 }
 
-uint8_t __mov_r2_a__ (memory & c51_memory, ...)
+uint8_t __mov_r2_a__ (c51_cpu & cpu, ...)
 {
-    c51_memory.current_bank()[R2] = *c51_memory.acc_A;
+    cpu.c51_memory.current_bank()[R2] = *cpu.c51_memory.acc_A;
     return 1;
 }
 
-uint8_t __mov_r3_a__ (memory & c51_memory, ...)
+uint8_t __mov_r3_a__ (c51_cpu & cpu, ...)
 {
-    c51_memory.current_bank()[R3] = *c51_memory.acc_A;
+    cpu.c51_memory.current_bank()[R3] = *cpu.c51_memory.acc_A;
     return 1;
 }
 
-uint8_t __mov_r4_a__ (memory & c51_memory, ...)
+uint8_t __mov_r4_a__ (c51_cpu & cpu, ...)
 {
-    c51_memory.current_bank()[R4] = *c51_memory.acc_A;
+    cpu.c51_memory.current_bank()[R4] = *cpu.c51_memory.acc_A;
     return 1;
 }
 
-uint8_t __mov_r5_a__ (memory & c51_memory, ...)
+uint8_t __mov_r5_a__ (c51_cpu & cpu, ...)
 {
-    c51_memory.current_bank()[R5] = *c51_memory.acc_A;
+    cpu.c51_memory.current_bank()[R5] = *cpu.c51_memory.acc_A;
     return 1;
 }
 
-uint8_t __mov_r6_a__ (memory & c51_memory, ...)
+uint8_t __mov_r6_a__ (c51_cpu & cpu, ...)
 {
-    c51_memory.current_bank()[R6] = *c51_memory.acc_A;
+    cpu.c51_memory.current_bank()[R6] = *cpu.c51_memory.acc_A;
     return 1;
 }
 
-uint8_t __mov_r7_a__ (memory & c51_memory, ...)
+uint8_t __mov_r7_a__ (c51_cpu & cpu, ...)
 {
-    c51_memory.current_bank()[R7] = *c51_memory.acc_A;
+    cpu.c51_memory.current_bank()[R7] = *cpu.c51_memory.acc_A;
     return 1;
 }
 
@@ -203,11 +205,11 @@ uint8_t __mov_r7_a__ (memory & c51_memory, ...)
 /// MOV A, #data
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_a_data__ (memory & c51_memory, ...)
+uint8_t __mov_a_data__ (c51_cpu & cpu, ...)
 {
     uint8_t data;
     __GET_ARGUMENT__(data);
-    *c51_memory.acc_A = data;
+    *cpu.c51_memory.acc_A = data;
     return 1;
 }
 
@@ -215,11 +217,11 @@ uint8_t __mov_a_data__ (memory & c51_memory, ...)
 /// MOV A, direct addr
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_a_direct__ (memory & c51_memory, ...)
+uint8_t __mov_a_direct__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    *c51_memory.acc_A = *c51_memory.locate(addr);
+    *cpu.c51_memory.acc_A = *cpu.c51_memory.locate(addr);
     return 1;
 }
 
@@ -227,67 +229,67 @@ uint8_t __mov_a_direct__ (memory & c51_memory, ...)
 /// MOV Rn, direct addr
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_r0_direct__ (memory & c51_memory, ...)
+uint8_t __mov_r0_direct__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    c51_memory.current_bank()[R0] = *c51_memory.locate(addr);
+    cpu.c51_memory.current_bank()[R0] = *cpu.c51_memory.locate(addr);
     return 2;
 }
 
-uint8_t __mov_r1_direct__ (memory & c51_memory, ...)
+uint8_t __mov_r1_direct__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    c51_memory.current_bank()[R1] = *c51_memory.locate(addr);
+    cpu.c51_memory.current_bank()[R1] = *cpu.c51_memory.locate(addr);
     return 2;
 }
 
-uint8_t __mov_r2_direct__ (memory & c51_memory, ...)
+uint8_t __mov_r2_direct__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    c51_memory.current_bank()[R2] = *c51_memory.locate(addr);
+    cpu.c51_memory.current_bank()[R2] = *cpu.c51_memory.locate(addr);
     return 2;
 }
 
-uint8_t __mov_r3_direct__ (memory & c51_memory, ...)
+uint8_t __mov_r3_direct__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    c51_memory.current_bank()[R3] = *c51_memory.locate(addr);
+    cpu.c51_memory.current_bank()[R3] = *cpu.c51_memory.locate(addr);
     return 2;
 }
 
-uint8_t __mov_r4_direct__ (memory & c51_memory, ...)
+uint8_t __mov_r4_direct__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    c51_memory.current_bank()[R4] = *c51_memory.locate(addr);
+    cpu.c51_memory.current_bank()[R4] = *cpu.c51_memory.locate(addr);
     return 2;
 }
 
-uint8_t __mov_r5_direct__ (memory & c51_memory, ...)
+uint8_t __mov_r5_direct__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    c51_memory.current_bank()[R5] = *c51_memory.locate(addr);
+    cpu.c51_memory.current_bank()[R5] = *cpu.c51_memory.locate(addr);
     return 2;
 }
 
-uint8_t __mov_r6_direct__ (memory & c51_memory, ...)
+uint8_t __mov_r6_direct__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    c51_memory.current_bank()[R6] = *c51_memory.locate(addr);
+    cpu.c51_memory.current_bank()[R6] = *cpu.c51_memory.locate(addr);
     return 2;
 }
 
-uint8_t __mov_r7_direct__ (memory & c51_memory, ...)
+uint8_t __mov_r7_direct__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    c51_memory.current_bank()[R7] = *c51_memory.locate(addr);
+    cpu.c51_memory.current_bank()[R7] = *cpu.c51_memory.locate(addr);
     return 2;
 }
 
@@ -295,11 +297,11 @@ uint8_t __mov_r7_direct__ (memory & c51_memory, ...)
 /// MOV direct addr, A
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_direct_a__ (memory & c51_memory, ...)
+uint8_t __mov_direct_a__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    *c51_memory.locate(addr) = *c51_memory.acc_A;
+    *cpu.c51_memory.locate(addr) = *cpu.c51_memory.acc_A;
     return 1;
 }
 
@@ -307,67 +309,67 @@ uint8_t __mov_direct_a__ (memory & c51_memory, ...)
 /// MOV direct addr, Rn
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_direct_r0__ (memory & c51_memory, ...)
+uint8_t __mov_direct_r0__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    *c51_memory.locate(addr) = c51_memory.current_bank()[R0];
+    *cpu.c51_memory.locate(addr) = cpu.c51_memory.current_bank()[R0];
     return 2;
 }
 
-uint8_t __mov_direct_r1__ (memory & c51_memory, ...)
+uint8_t __mov_direct_r1__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    *c51_memory.locate(addr) = c51_memory.current_bank()[R1];
+    *cpu.c51_memory.locate(addr) = cpu.c51_memory.current_bank()[R1];
     return 2;
 }
 
-uint8_t __mov_direct_r2__ (memory & c51_memory, ...)
+uint8_t __mov_direct_r2__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    *c51_memory.locate(addr) = c51_memory.current_bank()[R2];
+    *cpu.c51_memory.locate(addr) = cpu.c51_memory.current_bank()[R2];
     return 2;
 }
 
-uint8_t __mov_direct_r3__ (memory & c51_memory, ...)
+uint8_t __mov_direct_r3__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    *c51_memory.locate(addr) = c51_memory.current_bank()[R3];
+    *cpu.c51_memory.locate(addr) = cpu.c51_memory.current_bank()[R3];
     return 2;
 }
 
-uint8_t __mov_direct_r4__ (memory & c51_memory, ...)
+uint8_t __mov_direct_r4__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    *c51_memory.locate(addr) = c51_memory.current_bank()[R4];
+    *cpu.c51_memory.locate(addr) = cpu.c51_memory.current_bank()[R4];
     return 2;
 }
 
-uint8_t __mov_direct_r5__ (memory & c51_memory, ...)
+uint8_t __mov_direct_r5__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    *c51_memory.locate(addr) = c51_memory.current_bank()[R5];
+    *cpu.c51_memory.locate(addr) = cpu.c51_memory.current_bank()[R5];
     return 2;
 }
 
-uint8_t __mov_direct_r6__ (memory & c51_memory, ...)
+uint8_t __mov_direct_r6__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    *c51_memory.locate(addr) = c51_memory.current_bank()[R6];
+    *cpu.c51_memory.locate(addr) = cpu.c51_memory.current_bank()[R6];
     return 2;
 }
 
-uint8_t __mov_direct_r7__ (memory & c51_memory, ...)
+uint8_t __mov_direct_r7__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    *c51_memory.locate(addr) = c51_memory.current_bank()[R7];
+    *cpu.c51_memory.locate(addr) = cpu.c51_memory.current_bank()[R7];
     return 2;
 }
 
@@ -375,11 +377,11 @@ uint8_t __mov_direct_r7__ (memory & c51_memory, ...)
 /// MOV direct addr, direct addr
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_direct_direct__ (memory & c51_memory, ...)
+uint8_t __mov_direct_direct__ (c51_cpu & cpu, ...)
 {
     uint8_t addr1, addr2;
     __GET_2_ARGUMENTS__(addr1, addr2);
-    *c51_memory.locate(addr2) = *c51_memory.locate(addr1);
+    *cpu.c51_memory.locate(addr2) = *cpu.c51_memory.locate(addr1);
     return 2;
 }
 
@@ -387,11 +389,11 @@ uint8_t __mov_direct_direct__ (memory & c51_memory, ...)
 /// MOV direct addr, #data
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_direct_data__ (memory & c51_memory, ...)
+uint8_t __mov_direct_data__ (c51_cpu & cpu, ...)
 {
     uint8_t data, addr;
     __GET_2_ARGUMENTS__(addr, data);
-    *c51_memory.locate(addr) = data;
+    *cpu.c51_memory.locate(addr) = data;
     return 2;
 }
 
@@ -399,19 +401,19 @@ uint8_t __mov_direct_data__ (memory & c51_memory, ...)
 /// MOV @Ri, #data
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_at_r0_data__ (memory & c51_memory, ...)
+uint8_t __mov_at_r0_data__ (c51_cpu & cpu, ...)
 {
     uint8_t data;
     __GET_ARGUMENT__(data);
-    *c51_memory.locate(c51_memory.current_bank()[R0]) = data;
+    *cpu.c51_memory.locate(cpu.c51_memory.current_bank()[R0]) = data;
     return 1;
 }
 
-uint8_t __mov_at_r1_data__ (memory & c51_memory, ...)
+uint8_t __mov_at_r1_data__ (c51_cpu & cpu, ...)
 {
     uint8_t data;
     __GET_ARGUMENT__(data);
-    *c51_memory.locate(c51_memory.current_bank()[R1]) = data;
+    *cpu.c51_memory.locate(cpu.c51_memory.current_bank()[R1]) = data;
     return 1;
 }
 
@@ -419,15 +421,15 @@ uint8_t __mov_at_r1_data__ (memory & c51_memory, ...)
 /// MOV A, @Ri
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_a_at_r0__ (memory & c51_memory, ...)
+uint8_t __mov_a_at_r0__ (c51_cpu & cpu, ...)
 {
-    *c51_memory.acc_A = *c51_memory.locate(c51_memory.current_bank()[R0]);
+    *cpu.c51_memory.acc_A = *cpu.c51_memory.locate(cpu.c51_memory.current_bank()[R0]);
     return 1;
 }
 
-uint8_t __mov_a_at_r1__ (memory & c51_memory, ...)
+uint8_t __mov_a_at_r1__ (c51_cpu & cpu, ...)
 {
-    *c51_memory.acc_A = *c51_memory.locate(c51_memory.current_bank()[R1]);
+    *cpu.c51_memory.acc_A = *cpu.c51_memory.locate(cpu.c51_memory.current_bank()[R1]);
     return 1;
 }
 
@@ -435,15 +437,15 @@ uint8_t __mov_a_at_r1__ (memory & c51_memory, ...)
 /// MOV @Ri, A
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_at_r0_a__ (memory & c51_memory, ...)
+uint8_t __mov_at_r0_a__ (c51_cpu & cpu, ...)
 {
-    *c51_memory.locate(c51_memory.current_bank()[R0]) = *c51_memory.acc_A;
+    *cpu.c51_memory.locate(cpu.c51_memory.current_bank()[R0]) = *cpu.c51_memory.acc_A;
     return 1;
 }
 
-uint8_t __mov_at_r1_a__ (memory & c51_memory, ...)
+uint8_t __mov_at_r1_a__ (c51_cpu & cpu, ...)
 {
-    *c51_memory.locate(c51_memory.current_bank()[R1]) = *c51_memory.acc_A;
+    *cpu.c51_memory.locate(cpu.c51_memory.current_bank()[R1]) = *cpu.c51_memory.acc_A;
     return 1;
 }
 
@@ -451,19 +453,19 @@ uint8_t __mov_at_r1_a__ (memory & c51_memory, ...)
 /// MOV @Ri, direct
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_at_r0_direct__ (memory & c51_memory, ...)
+uint8_t __mov_at_r0_direct__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    *c51_memory.locate(c51_memory.current_bank()[R0]) = *c51_memory.locate(addr);
+    *cpu.c51_memory.locate(cpu.c51_memory.current_bank()[R0]) = *cpu.c51_memory.locate(addr);
     return 2;
 }
 
-uint8_t __mov_at_r1_direct__ (memory & c51_memory, ...)
+uint8_t __mov_at_r1_direct__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    *c51_memory.locate(c51_memory.current_bank()[R1]) = *c51_memory.locate(addr);
+    *cpu.c51_memory.locate(cpu.c51_memory.current_bank()[R1]) = *cpu.c51_memory.locate(addr);
     return 2;
 }
 
@@ -471,19 +473,19 @@ uint8_t __mov_at_r1_direct__ (memory & c51_memory, ...)
 /// MOV direct, @Ri
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_direct_at_r0__ (memory & c51_memory, ...)
+uint8_t __mov_direct_at_r0__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    *c51_memory.locate(addr) = *c51_memory.locate(c51_memory.current_bank()[R0]);
+    *cpu.c51_memory.locate(addr) = *cpu.c51_memory.locate(cpu.c51_memory.current_bank()[R0]);
     return 2;
 }
 
-uint8_t __mov_direct_at_r1__ (memory & c51_memory, ...)
+uint8_t __mov_direct_at_r1__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    *c51_memory.locate(addr) = *c51_memory.locate(c51_memory.current_bank()[R1]);
+    *cpu.c51_memory.locate(addr) = *cpu.c51_memory.locate(cpu.c51_memory.current_bank()[R1]);
     return 2;
 }
 
@@ -491,13 +493,13 @@ uint8_t __mov_direct_at_r1__ (memory & c51_memory, ...)
 /// MOV DPTR, #data16
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_dptr_data16__ (memory & c51_memory, ...)
+uint8_t __mov_dptr_data16__ (c51_cpu & cpu, ...)
 {
     uint8_t data1, data2;
     __GET_2_ARGUMENTS__(data1, data2);
     uint16_t dptr = data1 << 8;
     dptr |= data2;
-    *c51_memory.DPTR = dptr;
+    *cpu.c51_memory.DPTR = dptr;
     return 2;
 }
 
@@ -505,11 +507,11 @@ uint8_t __mov_dptr_data16__ (memory & c51_memory, ...)
 /// MOV C, bitaddr
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_c_bitaddr__ (memory & c51_memory, ...)
+uint8_t __mov_c_bitaddr__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    _8bit_set_bit(c51_memory.prog_stat_wd_PSW, PSW_CY, c51_memory.bit_access(addr));
+    _8bit_set_bit(cpu.c51_memory.prog_stat_wd_PSW, PSW_CY, cpu.c51_memory.bit_access(addr));
     return 1;
 }
 
@@ -517,12 +519,34 @@ uint8_t __mov_c_bitaddr__ (memory & c51_memory, ...)
 /// MOV bitaddr, C
 ///////////////////////////////////////////////////////////////
 
-uint8_t __mov_bitaddr_c__ (memory & c51_memory, ...)
+uint8_t __mov_bitaddr_c__ (c51_cpu & cpu, ...)
 {
     uint8_t addr;
     __GET_ARGUMENT__(addr);
-    c51_memory.bit_modify(addr, _8bit_get_bit(c51_memory.prog_stat_wd_PSW, PSW_CY));
+    cpu.c51_memory.bit_modify(addr, _8bit_get_bit(cpu.c51_memory.prog_stat_wd_PSW, PSW_CY));
     return 1;
+}
+
+///////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////
+/// MOVC A, @A+DPTR
+///////////////////////////////////////////////////////////////
+
+uint8_t __movc_a_at_a_dptr__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.acc_A = cpu.get_code(*cpu.c51_memory.acc_A + *cpu.c51_memory.DPTR);
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// MOVC A, @A+PC
+///////////////////////////////////////////////////////////////
+
+uint8_t __movc_a_at_a_pc__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.acc_A = cpu.get_code(*cpu.c51_memory.acc_A + cpu.get_pc());
+    return 2;
 }
 
 ///////////////////////////////////////////////////////////////
@@ -589,7 +613,7 @@ uint8_t instruction_arg_count(uint8_t instruction)
     }
 }
 
-uint8_t c51_cpu::exec(by_exec_t before_exec, by_exec_t after_exec)
+uint64_t c51_cpu::exec(by_exec_t before_exec, by_exec_t after_exec)
 {
     uint8_t instruction, args[2];
     ihx_file >> instruction;
@@ -604,7 +628,7 @@ uint8_t c51_cpu::exec(by_exec_t before_exec, by_exec_t after_exec)
         before_exec(instruction, this, args[0], args[1]);
     }
 
-    auto clock_count = instruction_set.at(instruction)(c51_memory, args[0], args[1]);
+    auto clock_count = instruction_set.at(instruction)(*this, args[0], args[1]);
     cur_time += clock_count;
 
     for (uint64_t i = 0; i < clock_count; i++)
@@ -699,6 +723,10 @@ c51_cpu::c51_cpu(const std::string &filename) : ihx_file(filename)
     __EMPLACE_OPERATION__(__MOV_C_BITADDR__, __mov_c_bitaddr__);
 
     __EMPLACE_OPERATION__(__MOV_BITADDR_C__, __mov_bitaddr_c__);
+
+    __EMPLACE_OPERATION__(__MOVC_A_AT_A_DPTR__, __movc_a_at_a_dptr__);
+
+    __EMPLACE_OPERATION__(__MOVC_A_AT_A_PC__, __movc_a_at_a_pc__);
 }
 
 void c51_cpu::clock_invocation()
