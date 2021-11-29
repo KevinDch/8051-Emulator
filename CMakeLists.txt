@@ -53,8 +53,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${EXTERNAL_LIBRARIES})
 # Unit tests
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     enable_testing()
-    default_marco(TEST_ENABLED_INSTRUCTIONS MOVX)
-            #"NOP;MOV;MOVC;MOVX")
+    default_marco(TEST_ENABLED_INSTRUCTIONS "")
+                # "NOP;MOV;MOVC;MOVX")
 endif ()
 
 foreach(__INSTRUCTION__ ${TEST_ENABLED_INSTRUCTIONS})
@@ -62,7 +62,7 @@ foreach(__INSTRUCTION__ ${TEST_ENABLED_INSTRUCTIONS})
     message("<-- Unit test for group ${__INSTRUCTION__} enabled -->")
 endforeach()
 
-if ("X${CMAKE_BUILD_TYPE}" STREQUAL "XDebug")
+if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
 
     _add_test(error                 "Error test")
     _add_test(debug                 "Debug test")

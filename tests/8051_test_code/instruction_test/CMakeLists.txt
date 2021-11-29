@@ -15,14 +15,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY      "${PROJECT_BIN_ROOT}/ihx_output")
 
 project(8051_test_code ASM)
 
-set(INSTRUCTION_LIST
-        nop
-        )
-
-foreach( INSTRUCTION ${INSTRUCTION_LIST} )
+function(add_ins INSTRUCTION)
     add_executable(${INSTRUCTION} asm/${INSTRUCTION}.asm)
     message("Added sample program `${INSTRUCTION}`")
-endforeach()
+endfunction()
 
 function(add_sub_ins CATALOG INS_LIST)
     foreach( INSTRUCTION ${INS_LIST} )
@@ -31,23 +27,34 @@ function(add_sub_ins CATALOG INS_LIST)
     endforeach()
 endfunction()
 
-set(MOV_INS_LIST
-        mov_rn_data mov_a_rn mov_rn_a mov_a_data mov_a_direct mov_rn_direct
-        mov_direct_a mov_direct_rn mov_direct_direct mov_direct_data mov_ri_data
-        mov_a_ri mov_ri_a mov_ri_direct mov_direct_ri mov_dptr_data16 mov_c_bitaddr
-        mov_bitaddr_c
-        )
-add_sub_ins(mov "${MOV_INS_LIST}")
+if (${NOP_ENABLED})
+    add_ins(nop)
+endif ()
 
-set(MOVC_INS_LIST
-        movc_a_a_dptr movc_a_a_pc
-        )
-add_sub_ins(movc "${MOVC_INS_LIST}")
+if (${MOV_ENABLED})
+    set(MOV_INS_LIST
+            mov_rn_data mov_a_rn mov_rn_a mov_a_data mov_a_direct mov_rn_direct
+            mov_direct_a mov_direct_rn mov_direct_direct mov_direct_data mov_ri_data
+            mov_a_ri mov_ri_a mov_ri_direct mov_direct_ri mov_dptr_data16 mov_c_bitaddr
+            mov_bitaddr_c
+            )
+    add_sub_ins(mov "${MOV_INS_LIST}")
+endif ()
 
-set(MOVX_INS_LIST
-        movx_dptr_a movx_ri_a movx_a_dptr movx_a_ri
-        )
-add_sub_ins(movx "${MOVX_INS_LIST}")
+if (${MOVC_ENABLED})
+    set(MOVC_INS_LIST
+            movc_a_a_dptr movc_a_a_pc
+            )
+    add_sub_ins(movc "${MOVC_INS_LIST}")
+endif()
+
+if (${MOVX_ENABLED})
+    set(MOVX_INS_LIST
+            movx_dptr_a movx_ri_a movx_a_dptr movx_a_ri
+            )
+    add_sub_ins(movx "${MOVX_INS_LIST}")
+endif ()
+
 
 unset(CMAKE_USER_MAKE_RULES_OVERRIDE_ASM)
 unset(CMAKE_C_COMPILER)
