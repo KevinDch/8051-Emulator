@@ -75,6 +75,14 @@ if (${RET_ENABLED})
     add_ins(ret)
 endif ()
 
+if (${AJMP_ENABLED})
+    set(AJMP_INS_LIST
+            ajmp_page0 ajmp_page1 ajmp_page2 ajmp_page3 ajmp_page4
+            ajmp_page5 ajmp_page6 ajmp_page7
+            )
+    add_sub_ins(ajmp "${AJMP_INS_LIST}")
+endif ()
+
 unset(CMAKE_USER_MAKE_RULES_OVERRIDE_ASM)
 unset(CMAKE_C_COMPILER)
 unset(CMAKE_ASM_COMPILER)

@@ -803,7 +803,7 @@ uint8_t __acall_page7__ (c51_cpu & cpu, ...) // 0xF1 (-111-1 0001)
 /// LJMP addr16
 ///////////////////////////////////////////////////////////////
 
-uint8_t __ljmp__ (c51_cpu & cpu, ...) // 0xF1 (-111-1 0001)
+uint8_t __ljmp__ (c51_cpu & cpu, ...)
 {
     uint8_t addr1, addr2;
     uint16_t addr;
@@ -823,7 +823,7 @@ uint8_t __ljmp__ (c51_cpu & cpu, ...) // 0xF1 (-111-1 0001)
 /// LCALL addr16
 ///////////////////////////////////////////////////////////////
 
-uint8_t __lcall__ (c51_cpu & cpu, ...) // 0xF1 (-111-1 0001)
+uint8_t __lcall__ (c51_cpu & cpu, ...)
 {
     uint8_t addr1, addr2;
     uint16_t addr;
@@ -849,7 +849,7 @@ uint8_t __lcall__ (c51_cpu & cpu, ...) // 0xF1 (-111-1 0001)
 /// RET
 ///////////////////////////////////////////////////////////////
 
-uint8_t __ret__ (c51_cpu & cpu, ...) // 0xF1 (-111-1 0001)
+uint8_t __ret__ (c51_cpu & cpu, ...)
 {
     uint8_t addr1, addr2;
     uint16_t addr;
@@ -863,6 +863,136 @@ uint8_t __ret__ (c51_cpu & cpu, ...) // 0xF1 (-111-1 0001)
     addr |= addr2 << 8;
 
     cpu.reset_pc(addr);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////
+/// AJMP page0
+///////////////////////////////////////////////////////////////
+
+uint8_t __ajmp_page0__ (c51_cpu & cpu, ...) // 0x11 (-000-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = addr7_0;
+    PC |= 0x0000;
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// AJMP page1
+///////////////////////////////////////////////////////////////
+
+uint8_t __ajmp_page1__ (c51_cpu & cpu, ...) // 0x31 (-001-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = addr7_0;
+    PC |= 0x0100; // 0000 0001 0000 0000
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// AJMP page2
+///////////////////////////////////////////////////////////////
+
+uint8_t __ajmp_page2__ (c51_cpu & cpu, ...) // 0x51 (-010-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = addr7_0;
+    PC |= 0x0200; // 0000 0010 0000 0000
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// AJMP page3
+///////////////////////////////////////////////////////////////
+
+uint8_t __ajmp_page3__ (c51_cpu & cpu, ...) // 0x51 (-011-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = addr7_0;
+    PC |= 0x0300; // 0000 0011 0000 0000
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// AJMP page4
+///////////////////////////////////////////////////////////////
+
+uint8_t __ajmp_page4__ (c51_cpu & cpu, ...) // 0x91 (-100-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = addr7_0;
+    PC |= 0x0400; // 0000 0100 0000 0000
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// AJMP page5
+///////////////////////////////////////////////////////////////
+
+uint8_t __ajmp_page5__ (c51_cpu & cpu, ...) // 0xB1 (-101-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = addr7_0;
+    PC |= 0x0500; // 0000 0101 0000 0000
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// AJMP page6
+///////////////////////////////////////////////////////////////
+
+uint8_t __ajmp_page6__ (c51_cpu & cpu, ...) // 0xD1 (-110-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = addr7_0;
+    PC |= 0x0600; // 0000 0110 0000 0000
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// AJMP page7
+///////////////////////////////////////////////////////////////
+
+uint8_t __ajmp_page7__ (c51_cpu & cpu, ...) // 0xF1 (-111-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = addr7_0;
+    PC |= 0x0700; // 0000 0111 0000 0000
+
+    cpu.reset_pc(PC);
 
     return 2;
 }
@@ -927,6 +1057,15 @@ uint8_t instruction_arg_count(uint8_t instruction)
         case __ACALL_PAGE5__:
         case __ACALL_PAGE6__:
         case __ACALL_PAGE7__:
+
+        case __AJMP_PAGE0__:
+        case __AJMP_PAGE1__:
+        case __AJMP_PAGE2__:
+        case __AJMP_PAGE3__:
+        case __AJMP_PAGE4__:
+        case __AJMP_PAGE5__:
+        case __AJMP_PAGE6__:
+        case __AJMP_PAGE7__:
 
             return 1;
 
@@ -1089,6 +1228,16 @@ c51_cpu::c51_cpu(const std::string &filename) : ihx_file(filename)
     __EMPLACE_OPERATION__(__LCALL__, __lcall__);
 
     __EMPLACE_OPERATION__(__RET__, __ret__);
+    
+
+    __EMPLACE_OPERATION__(__AJMP_PAGE0__, __ajmp_page0__);
+    __EMPLACE_OPERATION__(__AJMP_PAGE1__, __ajmp_page1__);
+    __EMPLACE_OPERATION__(__AJMP_PAGE2__, __ajmp_page2__);
+    __EMPLACE_OPERATION__(__AJMP_PAGE3__, __ajmp_page3__);
+    __EMPLACE_OPERATION__(__AJMP_PAGE4__, __ajmp_page4__);
+    __EMPLACE_OPERATION__(__AJMP_PAGE5__, __ajmp_page5__);
+    __EMPLACE_OPERATION__(__AJMP_PAGE6__, __ajmp_page6__);
+    __EMPLACE_OPERATION__(__AJMP_PAGE7__, __ajmp_page7__);
 }
 
 void c51_cpu::clock_invocation()

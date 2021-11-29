@@ -127,6 +127,17 @@
 
 ///////////////////////////////////////
 
+#define __AJMP_PAGE0__          0x01
+#define __AJMP_PAGE1__          0x21
+#define __AJMP_PAGE2__          0x41
+#define __AJMP_PAGE3__          0x61
+#define __AJMP_PAGE4__          0x81
+#define __AJMP_PAGE5__          0xA1
+#define __AJMP_PAGE6__          0xC1
+#define __AJMP_PAGE7__          0xE1
+
+///////////////////////////////////////
+
 class c51_cpu;
 
 typedef uint8_t (*ins_exec_t)(c51_cpu &, ...);

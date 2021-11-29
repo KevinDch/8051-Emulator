@@ -53,8 +53,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${EXTERNAL_LIBRARIES})
 # Unit tests
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     enable_testing()
-    default_marco(TEST_ENABLED_INSTRUCTIONS
-                 "NOP;MOV;MOVC;MOVX;ACALL;LJMP;LCALL;RET")
+    default_marco(TEST_ENABLED_INSTRUCTIONS "AJMP")
+                 #"NOP;MOV;MOVC;MOVX;ACALL;LJMP;LCALL;RET")
 endif ()
 
 foreach(__INSTRUCTION__ ${TEST_ENABLED_INSTRUCTIONS})
@@ -134,6 +134,18 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     # RET
     if (${RET_ENABLED})
         _add_test(c51_cpu_ret                       "C51 CPU test for instruction RET")
+    endif()
+
+    #AJMP
+    if (${AJMP_ENABLED})
+        c51_add_test(ajmp  c51_cpu_ajmp_page0      "C51 CPU test for instruction AJMP page0")
+        c51_add_test(ajmp  c51_cpu_ajmp_page1      "C51 CPU test for instruction AJMP page1")
+        c51_add_test(ajmp  c51_cpu_ajmp_page2      "C51 CPU test for instruction AJMP page2")
+        c51_add_test(ajmp  c51_cpu_ajmp_page3      "C51 CPU test for instruction AJMP page3")
+        c51_add_test(ajmp  c51_cpu_ajmp_page4      "C51 CPU test for instruction AJMP page4")
+        c51_add_test(ajmp  c51_cpu_ajmp_page5      "C51 CPU test for instruction AJMP page5")
+        c51_add_test(ajmp  c51_cpu_ajmp_page6      "C51 CPU test for instruction AJMP page6")
+        c51_add_test(ajmp  c51_cpu_ajmp_page7      "C51 CPU test for instruction AJMP page7")
     endif()
 endif()
 
