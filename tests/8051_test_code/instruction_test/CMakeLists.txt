@@ -57,7 +57,8 @@ endif ()
 
 if (${ACALL_ENABLED})
     set(ACALL_INS_LIST
-            acall_page0
+            acall_page0 acall_page1 acall_page2 acall_page3 acall_page4
+            acall_page5 acall_page6 acall_page7
             )
     add_sub_ins(acall "${ACALL_INS_LIST}")
 endif ()

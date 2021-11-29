@@ -7,11 +7,9 @@
 .area CABS    (ABS,CODE)
 .area RSEG    (ABS,DATA)
 
-.org 0x0000
-
 ACALL _start
 
-.org 0x000F
+.org 0x05FF
 
 _start:
 

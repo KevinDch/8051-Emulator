@@ -29,7 +29,7 @@ std::map < uint16_t, std::vector < uint8_t > > ihxstream::readline()
 {
     std::vector < char >    lit_data;
     std::vector < uint8_t > data;
-    char starting_code,
+    char starting_code = 0,
          lit_byte_count [3]{},
          lit_address    [5]{},
          lit_record_type[3]{},
@@ -41,7 +41,17 @@ std::map < uint16_t, std::vector < uint8_t > > ihxstream::readline()
     uint8_t     checksum;
 
     // read first 4 sections
-    file.read(&starting_code, 1);
+
+    while (starting_code != IHX_START_CODE)
+    {
+        if (!file)
+        {
+            return {}; // EOF
+        }
+
+        file >> starting_code;
+    }
+
     file.read(lit_byte_count, 2);
     file.read(lit_address, 4);
     file.read(lit_record_type, 2);
@@ -82,10 +92,6 @@ std::map < uint16_t, std::vector < uint8_t > > ihxstream::readline()
     }
 
     // verify
-    if (starting_code != IHX_START_CODE)
-    {
-        return {};
-    }
 
     uint8_t cmp_of_checksum = byte_count + address_split[0] + address_split[1] + record_type;
     for (auto i : data)

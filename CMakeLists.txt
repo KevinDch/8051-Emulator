@@ -117,6 +117,13 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     #ACALL
     if (${ACALL_ENABLED})
         c51_add_test(acall c51_cpu_acall_page0      "C51 CPU test for instruction ACALL page0")
+        c51_add_test(acall c51_cpu_acall_page1      "C51 CPU test for instruction ACALL page1")
+        c51_add_test(acall c51_cpu_acall_page2      "C51 CPU test for instruction ACALL page2")
+        c51_add_test(acall c51_cpu_acall_page3      "C51 CPU test for instruction ACALL page3")
+        c51_add_test(acall c51_cpu_acall_page4      "C51 CPU test for instruction ACALL page4")
+        c51_add_test(acall c51_cpu_acall_page5      "C51 CPU test for instruction ACALL page5")
+        c51_add_test(acall c51_cpu_acall_page6      "C51 CPU test for instruction ACALL page6")
+        c51_add_test(acall c51_cpu_acall_page7      "C51 CPU test for instruction ACALL page7")
     endif()
 endif()
 
