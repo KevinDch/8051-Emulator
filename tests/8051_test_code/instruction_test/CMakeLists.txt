@@ -45,7 +45,7 @@ set(MOVC_INS_LIST
 add_sub_ins(movc "${MOVC_INS_LIST}")
 
 set(MOVX_INS_LIST
-        movx_dptr_a
+        movx_dptr_a movx_ri_a movx_a_dptr movx_a_ri
         )
 add_sub_ins(movx "${MOVX_INS_LIST}")
 

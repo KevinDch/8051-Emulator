@@ -552,12 +552,62 @@ uint8_t __movc_a_at_a_pc__ (c51_cpu & cpu, ...)
 ///////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////
-/// MOVC A, @A+PC
+/// MOVX @DPTR, A
 ///////////////////////////////////////////////////////////////
 
 uint8_t __movx_at_dptr_a__ (c51_cpu & cpu, ...)
 {
     *cpu.c51_memory.locatex(*cpu.c51_memory.DPTR) = *cpu.c51_memory.acc_A;
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// MOVX @R0, A
+///////////////////////////////////////////////////////////////
+
+uint8_t __movx_at_r0_a__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.locatex(cpu.c51_memory.current_bank()[R0]) = *cpu.c51_memory.acc_A;
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// MOVX @R1, A
+///////////////////////////////////////////////////////////////
+
+uint8_t __movx_at_r1_a__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.locatex(cpu.c51_memory.current_bank()[R1]) = *cpu.c51_memory.acc_A;
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// MOVX A, @DPTR
+///////////////////////////////////////////////////////////////
+
+uint8_t __movx_a_at_dptr__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.acc_A = *cpu.c51_memory.locatex(*cpu.c51_memory.DPTR);
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// MOVX A, @R0
+///////////////////////////////////////////////////////////////
+
+uint8_t __movx_a_at_r0__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.acc_A = *cpu.c51_memory.locatex(cpu.c51_memory.current_bank()[R0]);
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// MOVX A, @R1
+///////////////////////////////////////////////////////////////
+
+uint8_t __movx_a_at_r1__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.acc_A = *cpu.c51_memory.locatex(cpu.c51_memory.current_bank()[R1]);
     return 2;
 }
 
@@ -744,6 +794,14 @@ c51_cpu::c51_cpu(const std::string &filename) : ihx_file(filename)
 
 
     __EMPLACE_OPERATION__(__MOVX_AT_DPTR_A__, __movx_at_dptr_a__);
+
+    __EMPLACE_OPERATION__(__MOVX_AT_R0_A__, __movx_at_r0_a__);
+    __EMPLACE_OPERATION__(__MOVX_AT_R1_A__, __movx_at_r1_a__);
+
+    __EMPLACE_OPERATION__(__MOVX_A_AT_DPTR__, __movx_a_at_dptr__);
+
+    __EMPLACE_OPERATION__(__MOVX_A_AT_R0__, __movx_a_at_r0__);
+    __EMPLACE_OPERATION__(__MOVX_A_AT_R1__, __movx_a_at_r1__);
 }
 
 void c51_cpu::clock_invocation()

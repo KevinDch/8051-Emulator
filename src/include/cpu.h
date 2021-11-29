@@ -83,11 +83,21 @@
 
 #define __MOV_BITADDR_C__       0x92
 
+
 #define __MOVC_A_AT_A_DPTR__    0x93
 
 #define __MOVC_A_AT_A_PC__      0x83
 
+
 #define __MOVX_AT_DPTR_A__      0xF0
+
+#define __MOVX_AT_R0_A__        0xF2
+#define __MOVX_AT_R1_A__        0xF3
+
+#define __MOVX_A_AT_DPTR__      0xE0
+
+#define __MOVX_A_AT_R0__        0xE2
+#define __MOVX_A_AT_R1__        0xE3
 
 
 class c51_cpu;
