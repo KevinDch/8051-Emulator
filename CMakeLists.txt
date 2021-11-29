@@ -53,8 +53,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${EXTERNAL_LIBRARIES})
 # Unit tests
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     enable_testing()
-    default_marco(TEST_ENABLED_INSTRUCTIONS "")
-                # "NOP;MOV;MOVC;MOVX")
+    default_marco(TEST_ENABLED_INSTRUCTIONS "LJMP;ACALL")
+                # "NOP;MOV;MOVC;MOVX;ACALL")
 endif ()
 
 foreach(__INSTRUCTION__ ${TEST_ENABLED_INSTRUCTIONS})
@@ -109,6 +109,15 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
         c51_add_test(movx c51_cpu_movx_a_ri         "C51 CPU test for instruction MOVX A, @Ri")
     endif()
 
+    # LJMP
+    if (${LJMP_ENABLED})
+        _add_test(c51_cpu_ljmp                      "C51 CPU test for instruction LJMP addr16")
+    endif()
+
+    #ACALL
+    if (${ACALL_ENABLED})
+        c51_add_test(acall c51_cpu_acall_page0      "C51 CPU test for instruction ACALL page0")
+    endif()
 endif()
 
 # 8051 test code

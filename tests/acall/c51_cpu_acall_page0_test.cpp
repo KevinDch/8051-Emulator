@@ -5,12 +5,12 @@
 
 /** @file
  *
- * This file defines test for C51 CPU instruction set MOVC @DPTR, A
+ * This file defines test for C51 CPU instruction set ACALL page0
  */
 
 void check_val(uint8_t, c51_cpu* CPU, ...)
 {
-    if (*CPU->c51_memory.locatex(0x01) != 0x01)
+    if (*CPU->c51_memory.acc_A != 0xFF)
     {
         exit(EXIT_FAILURE);
     }
@@ -21,11 +21,9 @@ int main(int argc, char ** argv)
 {
     try
     {
-        c51_cpu CPU(PROJECT_BINARY_DIR "/ihx_output/movx_dptr_a.ihx");
+        c51_cpu CPU(PROJECT_BINARY_DIR "/ihx_output/acall_page0.ihx");
         //////////////////////////////////////////////////////////////////
         CPU.exec();
-        CPU.exec();
-
         CPU.exec(nullptr, check_val);
     }
     catch (std::exception & err)

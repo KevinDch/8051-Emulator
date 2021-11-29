@@ -5,7 +5,7 @@
 
 /** @file
  *
- * This file defines test for C51 CPU instruction set MOVC A, @A+DPTR
+ * This file defines test for C51 CPU instruction set MOVC A, @A+PC
  */
 
 void check_val(uint8_t, c51_cpu* CPU, ...)

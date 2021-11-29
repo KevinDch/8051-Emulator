@@ -7,6 +7,8 @@
 
 #define __NOP__                 0x00
 
+///////////////////////////////////////
+
 #define __MOV_R0_DATA__         0x78
 #define __MOV_R1_DATA__         0x79
 #define __MOV_R2_DATA__         0x7A
@@ -88,6 +90,7 @@
 
 #define __MOVC_A_AT_A_PC__      0x83
 
+///////////////////////////////////////
 
 #define __MOVX_AT_DPTR_A__      0xF0
 
@@ -99,6 +102,20 @@
 #define __MOVX_A_AT_R0__        0xE2
 #define __MOVX_A_AT_R1__        0xE3
 
+///////////////////////////////////////
+
+#define __ACALL_PAGE0__         0x11
+#define __ACALL_PAGE1__         0x31
+#define __ACALL_PAGE2__         0x51
+#define __ACALL_PAGE3__         0x71
+#define __ACALL_PAGE4__         0x91
+#define __ACALL_PAGE5__         0xB1
+#define __ACALL_PAGE6__         0xD1
+#define __ACALL_PAGE7__         0xF1
+
+///////////////////////////////////////
+
+#define __LJMP__                0x02
 
 class c51_cpu;
 
@@ -123,6 +140,8 @@ public:
 
     /// get program counter
     [[nodiscard]] uint16_t get_pc() const { return ihx_file.get_pc(); }
+
+    void reset_pc(uint16_t PC) { ihx_file.reset(PC); }
 
     explicit c51_cpu(const std::string & filename);
 

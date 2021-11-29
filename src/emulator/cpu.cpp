@@ -613,6 +613,212 @@ uint8_t __movx_a_at_r1__ (c51_cpu & cpu, ...)
 
 ///////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////
+/// ACALL page0
+///////////////////////////////////////////////////////////////
+
+uint8_t __acall_page0__ (c51_cpu & cpu, ...) // 0x11 (-000-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = cpu.get_pc();
+
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC; // PC 7 - 0
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC >> 8; // PC 15 - 8
+
+    PC = addr7_0;
+    PC |= 0x0000;
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// ACALL page1
+///////////////////////////////////////////////////////////////
+
+uint8_t __acall_page1__ (c51_cpu & cpu, ...) // 0x31 (-001-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = cpu.get_pc();
+
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC; // PC 7 - 0
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC >> 8; // PC 15 - 8
+
+    PC = addr7_0;
+    PC |= 0x0100; // 0000 0001 0000 0000
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// ACALL page2
+///////////////////////////////////////////////////////////////
+
+uint8_t __acall_page2__ (c51_cpu & cpu, ...) // 0x51 (-010-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = cpu.get_pc();
+
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC; // PC 7 - 0
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC >> 8; // PC 15 - 8
+
+    PC = addr7_0;
+    PC |= 0x0200; // 0000 0010 0000 0000
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// ACALL page3
+///////////////////////////////////////////////////////////////
+
+uint8_t __acall_page3__ (c51_cpu & cpu, ...) // 0x51 (-011-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = cpu.get_pc();
+
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC; // PC 7 - 0
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC >> 8; // PC 15 - 8
+
+    PC = addr7_0;
+    PC |= 0x0300; // 0000 0011 0000 0000
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// ACALL page4
+///////////////////////////////////////////////////////////////
+
+uint8_t __acall_page4__ (c51_cpu & cpu, ...) // 0x91 (-100-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = cpu.get_pc();
+
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC; // PC 7 - 0
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC >> 8; // PC 15 - 8
+
+    PC = addr7_0;
+    PC |= 0x0400; // 0000 0100 0000 0000
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// ACALL page5
+///////////////////////////////////////////////////////////////
+
+uint8_t __acall_page5__ (c51_cpu & cpu, ...) // 0xB1 (-101-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = cpu.get_pc();
+
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC; // PC 7 - 0
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC >> 8; // PC 15 - 8
+
+    PC = addr7_0;
+    PC |= 0x0500; // 0000 0101 0000 0000
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// ACALL page6
+///////////////////////////////////////////////////////////////
+
+uint8_t __acall_page6__ (c51_cpu & cpu, ...) // 0xD1 (-110-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = cpu.get_pc();
+
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC; // PC 7 - 0
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC >> 8; // PC 15 - 8
+
+    PC = addr7_0;
+    PC |= 0x0600; // 0000 0110 0000 0000
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+/// ACALL page7
+///////////////////////////////////////////////////////////////
+
+uint8_t __acall_page7__ (c51_cpu & cpu, ...) // 0xF1 (-111-1 0001)
+{
+    uint8_t addr7_0;
+    __GET_ARGUMENT__(addr7_0);
+    uint16_t PC = cpu.get_pc();
+
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC; // PC 7 - 0
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC >> 8; // PC 15 - 8
+
+    PC = addr7_0;
+    PC |= 0x0700; // 0000 0111 0000 0000
+
+    cpu.reset_pc(PC);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////
+/// LJMP addr16
+///////////////////////////////////////////////////////////////
+
+uint8_t __ljmp__ (c51_cpu & cpu, ...) // 0xF1 (-111-1 0001)
+{
+    uint8_t addr1, addr2;
+    uint16_t addr;
+    __GET_2_ARGUMENTS__(addr1, addr2);
+
+    addr = addr2;
+    addr |= addr1 << 8;
+
+    cpu.reset_pc(addr);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+
 uint8_t instruction_arg_count(uint8_t instruction)
 {
     switch (instruction)
@@ -662,12 +868,24 @@ uint8_t instruction_arg_count(uint8_t instruction)
         case __MOV_C_BITADDR__:
 
         case __MOV_BITADDR_C__:
+
+        case __ACALL_PAGE0__:
+        case __ACALL_PAGE1__:
+        case __ACALL_PAGE2__:
+        case __ACALL_PAGE3__:
+        case __ACALL_PAGE4__:
+        case __ACALL_PAGE5__:
+        case __ACALL_PAGE6__:
+        case __ACALL_PAGE7__:
+
             return 1;
 
         case __MOV_DIRECT_DIRECT__:
         case __MOV_DIRECT_DATA__:
 
         case __MOV_DPTR_DATA16__:
+
+        case __LJMP__:
             return 2;
 
         default:
@@ -802,6 +1020,19 @@ c51_cpu::c51_cpu(const std::string &filename) : ihx_file(filename)
 
     __EMPLACE_OPERATION__(__MOVX_A_AT_R0__, __movx_a_at_r0__);
     __EMPLACE_OPERATION__(__MOVX_A_AT_R1__, __movx_a_at_r1__);
+
+
+    __EMPLACE_OPERATION__(__ACALL_PAGE0__, __acall_page0__);
+    __EMPLACE_OPERATION__(__ACALL_PAGE1__, __acall_page1__);
+    __EMPLACE_OPERATION__(__ACALL_PAGE2__, __acall_page2__);
+    __EMPLACE_OPERATION__(__ACALL_PAGE3__, __acall_page3__);
+    __EMPLACE_OPERATION__(__ACALL_PAGE4__, __acall_page4__);
+    __EMPLACE_OPERATION__(__ACALL_PAGE5__, __acall_page5__);
+    __EMPLACE_OPERATION__(__ACALL_PAGE6__, __acall_page6__);
+    __EMPLACE_OPERATION__(__ACALL_PAGE7__, __acall_page7__);
+
+
+    __EMPLACE_OPERATION__(__LJMP__, __ljmp__);
 }
 
 void c51_cpu::clock_invocation()

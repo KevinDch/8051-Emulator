@@ -55,6 +55,17 @@ if (${MOVX_ENABLED})
     add_sub_ins(movx "${MOVX_INS_LIST}")
 endif ()
 
+if (${ACALL_ENABLED})
+    set(ACALL_INS_LIST
+            acall_page0
+            )
+    add_sub_ins(acall "${ACALL_INS_LIST}")
+endif ()
+
+if (${LJMP_ENABLED})
+    add_ins(ljmp)
+endif ()
+
 
 unset(CMAKE_USER_MAKE_RULES_OVERRIDE_ASM)
 unset(CMAKE_C_COMPILER)

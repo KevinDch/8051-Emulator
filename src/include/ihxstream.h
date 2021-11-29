@@ -19,7 +19,7 @@ private:
     std::map < uint16_t, std::vector < uint8_t > > program;
     uint8_t _64bit_program_stack [1024 * 64] { };
 
-    uint32_t read_offset = 0;
+    uint16_t read_offset = 0;
     bool auto_accel = false;
 
     /// read a single line of IHX file
@@ -46,7 +46,7 @@ public:
 
     /// reset read offset
     /// @param new_offset new offset
-    void reset(uint32_t new_offset = 0)
+    void reset(uint16_t new_offset = 0)
         {   read_offset = new_offset;
             auto_accel = false;
         }
