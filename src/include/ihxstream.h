@@ -20,7 +20,6 @@ private:
     uint8_t _64bit_program_stack [1024 * 64] { };
 
     uint16_t read_offset = 0;
-    bool auto_accel = false;
 
     /// read a single line of IHX file
     /// @return data of that line, converted, with address attached
@@ -37,7 +36,7 @@ public:
 
     /// @return return next char in data pool, offset recorded
     uint8_t next()
-        {   auto_accel = true;
+        {
             return _64bit_program_stack[read_offset++];
         }
 
@@ -47,9 +46,7 @@ public:
     /// reset read offset
     /// @param new_offset new offset
     void reset(uint16_t new_offset = 0)
-        {   read_offset = new_offset;
-            auto_accel = false;
-        }
+        {   read_offset = new_offset;   }
 
     /// get code memory
     [[nodiscard]] uint8_t get_code(uint16_t addr) const { return _64bit_program_stack[addr]; }

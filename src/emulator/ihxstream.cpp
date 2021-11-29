@@ -125,12 +125,5 @@ void ihxstream::fill_64bit_program_stack()
 
 uint16_t ihxstream::get_pc() const
 {
-    if (auto_accel)
-    {
-        return read_offset - 1;
-    }
-    else
-    {
-        return read_offset;
-    }
+    return read_offset;
 }

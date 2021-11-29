@@ -5,12 +5,12 @@
 
 /** @file
  *
- * This file defines test for C51 CPU instruction set MOVC A, @A+PC
+ * This file defines test for C51 CPU instruction set LCALL addr16
  */
 
 void check_val(uint8_t, c51_cpu* CPU, ...)
 {
-    if (*CPU->c51_memory.acc_A != 0xFF)
+    if (*CPU->c51_memory.acc_A != 0x0F)
     {
         exit(EXIT_FAILURE);
     }
@@ -21,8 +21,10 @@ int main(int argc, char ** argv)
 {
     try
     {
-        c51_cpu CPU(PROJECT_BINARY_DIR "/ihx_output/movc_a_a_pc.ihx");
+        c51_cpu CPU(PROJECT_BINARY_DIR "/ihx_output/ret.ihx");
         //////////////////////////////////////////////////////////////////
+        CPU.exec();
+        CPU.exec();
         CPU.exec();
         CPU.exec(nullptr, check_val);
     }

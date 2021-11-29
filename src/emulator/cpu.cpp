@@ -819,6 +819,56 @@ uint8_t __ljmp__ (c51_cpu & cpu, ...) // 0xF1 (-111-1 0001)
 
 ///////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////
+/// LCALL addr16
+///////////////////////////////////////////////////////////////
+
+uint8_t __lcall__ (c51_cpu & cpu, ...) // 0xF1 (-111-1 0001)
+{
+    uint8_t addr1, addr2;
+    uint16_t addr;
+    __GET_2_ARGUMENTS__(addr1, addr2);
+
+    addr = addr2;
+    addr |= addr1 << 8;
+
+    uint16_t PC = cpu.get_pc();
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC;
+    cpu.c51_memory.stack_pointer += 1;
+    *cpu.c51_memory.stack_pointer = PC >> 8;
+
+    cpu.reset_pc(addr);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////
+/// RET
+///////////////////////////////////////////////////////////////
+
+uint8_t __ret__ (c51_cpu & cpu, ...) // 0xF1 (-111-1 0001)
+{
+    uint8_t addr1, addr2;
+    uint16_t addr;
+
+    addr2 = *cpu.c51_memory.stack_pointer;
+    cpu.c51_memory.stack_pointer -= 1;
+    addr1 = *cpu.c51_memory.stack_pointer;
+    cpu.c51_memory.stack_pointer -= 1;
+
+    addr = addr1;
+    addr |= addr2 << 8;
+
+    cpu.reset_pc(addr);
+
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+
 uint8_t instruction_arg_count(uint8_t instruction)
 {
     switch (instruction)
@@ -886,6 +936,8 @@ uint8_t instruction_arg_count(uint8_t instruction)
         case __MOV_DPTR_DATA16__:
 
         case __LJMP__:
+
+        case __LCALL__:
             return 2;
 
         default:
@@ -1033,6 +1085,10 @@ c51_cpu::c51_cpu(const std::string &filename) : ihx_file(filename)
 
 
     __EMPLACE_OPERATION__(__LJMP__, __ljmp__);
+
+    __EMPLACE_OPERATION__(__LCALL__, __lcall__);
+
+    __EMPLACE_OPERATION__(__RET__, __ret__);
 }
 
 void c51_cpu::clock_invocation()

@@ -53,8 +53,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${EXTERNAL_LIBRARIES})
 # Unit tests
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     enable_testing()
-    default_marco(TEST_ENABLED_INSTRUCTIONS "LJMP;ACALL")
-                # "NOP;MOV;MOVC;MOVX;ACALL")
+    default_marco(TEST_ENABLED_INSTRUCTIONS
+                 "NOP;MOV;MOVC;MOVX;ACALL;LJMP;LCALL;RET")
 endif ()
 
 foreach(__INSTRUCTION__ ${TEST_ENABLED_INSTRUCTIONS})
@@ -124,6 +124,16 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
         c51_add_test(acall c51_cpu_acall_page5      "C51 CPU test for instruction ACALL page5")
         c51_add_test(acall c51_cpu_acall_page6      "C51 CPU test for instruction ACALL page6")
         c51_add_test(acall c51_cpu_acall_page7      "C51 CPU test for instruction ACALL page7")
+    endif()
+
+    # LCALL
+    if (${LCALL_ENABLED})
+        _add_test(c51_cpu_lcall                     "C51 CPU test for instruction LCALL addr16")
+    endif()
+
+    # RET
+    if (${RET_ENABLED})
+        _add_test(c51_cpu_ret                       "C51 CPU test for instruction RET")
     endif()
 endif()
 

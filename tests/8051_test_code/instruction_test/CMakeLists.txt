@@ -67,6 +67,13 @@ if (${LJMP_ENABLED})
     add_ins(ljmp)
 endif ()
 
+if (${LCALL_ENABLED})
+    add_ins(lcall)
+endif ()
+
+if (${RET_ENABLED})
+    add_ins(ret)
+endif ()
 
 unset(CMAKE_USER_MAKE_RULES_OVERRIDE_ASM)
 unset(CMAKE_C_COMPILER)
