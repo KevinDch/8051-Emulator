@@ -999,6 +999,140 @@ uint8_t __ajmp_page7__ (c51_cpu & cpu, ...) // 0xF1 (-111-1 0001)
 
 ///////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////
+/// INC A
+///////////////////////////////////////////////////////////////
+
+uint8_t __inc_a__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.acc_A += 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// INC addr
+///////////////////////////////////////////////////////////////
+
+uint8_t __inc_addr__ (c51_cpu & cpu, ...)
+{
+    uint8_t addr;
+    __GET_ARGUMENT__(addr);
+    *cpu.c51_memory.locate(addr) += 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// INC @R0
+///////////////////////////////////////////////////////////////
+
+uint8_t __inc_at_r0__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.locate(cpu.c51_memory.current_bank()[R0]) += 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// INC @R1
+///////////////////////////////////////////////////////////////
+
+uint8_t __inc_at_r1__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.locate(cpu.c51_memory.current_bank()[R1]) += 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// INC R0
+///////////////////////////////////////////////////////////////
+
+uint8_t __inc_r0__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R0] += 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// INC R1
+///////////////////////////////////////////////////////////////
+
+uint8_t __inc_r1__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R1] += 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// INC R2
+///////////////////////////////////////////////////////////////
+
+uint8_t __inc_r2__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R2] += 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// INC R3
+///////////////////////////////////////////////////////////////
+
+uint8_t __inc_r3__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R3] += 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// INC R4
+///////////////////////////////////////////////////////////////
+
+uint8_t __inc_r4__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R4] += 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// INC R5
+///////////////////////////////////////////////////////////////
+
+uint8_t __inc_r5__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R5] += 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// INC R6
+///////////////////////////////////////////////////////////////
+
+uint8_t __inc_r6__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R6] += 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// INC R7
+///////////////////////////////////////////////////////////////
+
+uint8_t __inc_r7__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R7] += 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// INC DPTR
+///////////////////////////////////////////////////////////////
+
+uint8_t __inc_dptr__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.DPTR += 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+
 uint8_t instruction_arg_count(uint8_t instruction)
 {
     switch (instruction)
@@ -1066,6 +1200,8 @@ uint8_t instruction_arg_count(uint8_t instruction)
         case __AJMP_PAGE5__:
         case __AJMP_PAGE6__:
         case __AJMP_PAGE7__:
+
+        case __INC_ADDR__:
 
             return 1;
 
@@ -1238,6 +1374,25 @@ c51_cpu::c51_cpu(const std::string &filename) : ihx_file(filename)
     __EMPLACE_OPERATION__(__AJMP_PAGE5__, __ajmp_page5__);
     __EMPLACE_OPERATION__(__AJMP_PAGE6__, __ajmp_page6__);
     __EMPLACE_OPERATION__(__AJMP_PAGE7__, __ajmp_page7__);
+
+
+    __EMPLACE_OPERATION__(__INC_A__, __inc_a__);
+
+    __EMPLACE_OPERATION__(__INC_ADDR__, __inc_addr__);
+
+    __EMPLACE_OPERATION__(__INC_AT_R0__, __inc_at_r0__);
+    __EMPLACE_OPERATION__(__INC_AT_R1__, __inc_at_r1__);
+
+    __EMPLACE_OPERATION__(__INC_R0__, __inc_r0__);
+    __EMPLACE_OPERATION__(__INC_R1__, __inc_r1__);
+    __EMPLACE_OPERATION__(__INC_R2__, __inc_r2__);
+    __EMPLACE_OPERATION__(__INC_R3__, __inc_r3__);
+    __EMPLACE_OPERATION__(__INC_R4__, __inc_r4__);
+    __EMPLACE_OPERATION__(__INC_R5__, __inc_r5__);
+    __EMPLACE_OPERATION__(__INC_R6__, __inc_r6__);
+    __EMPLACE_OPERATION__(__INC_R7__, __inc_r7__);
+
+    __EMPLACE_OPERATION__(__INC_DPTR__, __inc_dptr__);
 }
 
 void c51_cpu::clock_invocation()

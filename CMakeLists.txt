@@ -53,8 +53,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${EXTERNAL_LIBRARIES})
 # Unit tests
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     enable_testing()
-    default_marco(TEST_ENABLED_INSTRUCTIONS "AJMP")
-                 #"NOP;MOV;MOVC;MOVX;ACALL;LJMP;LCALL;RET")
+    default_marco(TEST_ENABLED_INSTRUCTIONS "INC")
+                 #"NOP;MOV;MOVC;MOVX;ACALL;LJMP;LCALL;RET;AJMP;INC")
 endif ()
 
 foreach(__INSTRUCTION__ ${TEST_ENABLED_INSTRUCTIONS})
@@ -114,7 +114,7 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
         _add_test(c51_cpu_ljmp                      "C51 CPU test for instruction LJMP addr16")
     endif()
 
-    #ACALL
+    # ACALL
     if (${ACALL_ENABLED})
         c51_add_test(acall c51_cpu_acall_page0      "C51 CPU test for instruction ACALL page0")
         c51_add_test(acall c51_cpu_acall_page1      "C51 CPU test for instruction ACALL page1")
@@ -136,7 +136,7 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
         _add_test(c51_cpu_ret                       "C51 CPU test for instruction RET")
     endif()
 
-    #AJMP
+    # AJMP
     if (${AJMP_ENABLED})
         c51_add_test(ajmp  c51_cpu_ajmp_page0      "C51 CPU test for instruction AJMP page0")
         c51_add_test(ajmp  c51_cpu_ajmp_page1      "C51 CPU test for instruction AJMP page1")
@@ -147,6 +147,16 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
         c51_add_test(ajmp  c51_cpu_ajmp_page6      "C51 CPU test for instruction AJMP page6")
         c51_add_test(ajmp  c51_cpu_ajmp_page7      "C51 CPU test for instruction AJMP page7")
     endif()
+
+    # INC
+    if (${INC_ENABLED})
+        c51_add_test(inc  c51_cpu_inc_a            "C51 CPU test for instruction INC A")
+        c51_add_test(inc  c51_cpu_inc_addr         "C51 CPU test for instruction INC addr")
+        c51_add_test(inc  c51_cpu_inc_ri           "C51 CPU test for instruction INC @Ri")
+        c51_add_test(inc  c51_cpu_inc_rn           "C51 CPU test for instruction INC Rn")
+        c51_add_test(inc  c51_cpu_inc_dptr         "C51 CPU test for instruction INC DPTR")
+    endif()
+
 endif()
 
 # 8051 test code

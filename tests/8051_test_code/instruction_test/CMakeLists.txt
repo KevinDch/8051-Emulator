@@ -83,6 +83,13 @@ if (${AJMP_ENABLED})
     add_sub_ins(ajmp "${AJMP_INS_LIST}")
 endif ()
 
+if (${INC_ENABLED})
+    set(INC_INS_LIST
+            inc_a inc_addr inc_ri inc_rn inc_dptr
+            )
+    add_sub_ins(inc "${INC_INS_LIST}")
+endif ()
+
 unset(CMAKE_USER_MAKE_RULES_OVERRIDE_ASM)
 unset(CMAKE_C_COMPILER)
 unset(CMAKE_ASM_COMPILER)
