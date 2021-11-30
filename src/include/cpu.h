@@ -158,6 +158,24 @@
 
 ///////////////////////////////////////
 
+#define __DEC_A__               0x14
+
+#define __DEC_ADDR__            0x15
+
+#define __DEC_AT_R0__           0x16
+#define __DEC_AT_R1__           0x17
+
+#define __DEC_R0__              0x18
+#define __DEC_R1__              0x19
+#define __DEC_R2__              0x1A
+#define __DEC_R3__              0x1B
+#define __DEC_R4__              0x1C
+#define __DEC_R5__              0x1D
+#define __DEC_R6__              0x1E
+#define __DEC_R7__              0x1F
+
+///////////////////////////////////////
+
 class c51_cpu;
 
 typedef uint8_t (*ins_exec_t)(c51_cpu &, ...);

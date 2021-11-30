@@ -1128,6 +1128,130 @@ uint8_t __inc_r7__ (c51_cpu & cpu, ...)
 uint8_t __inc_dptr__ (c51_cpu & cpu, ...)
 {
     *cpu.c51_memory.DPTR += 1;
+    return 2;
+}
+
+///////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////
+/// DEC A
+///////////////////////////////////////////////////////////////
+
+uint8_t __dec_a__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.acc_A -= 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// DEC addr
+///////////////////////////////////////////////////////////////
+
+uint8_t __dec_addr__ (c51_cpu & cpu, ...)
+{
+    uint8_t addr;
+    __GET_ARGUMENT__(addr);
+    *cpu.c51_memory.locate(addr) -= 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// DEC @R0
+///////////////////////////////////////////////////////////////
+
+uint8_t __dec_at_r0__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.locate(cpu.c51_memory.current_bank()[R0]) -= 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// DEC @R1
+///////////////////////////////////////////////////////////////
+
+uint8_t __dec_at_r1__ (c51_cpu & cpu, ...)
+{
+    *cpu.c51_memory.locate(cpu.c51_memory.current_bank()[R1]) -= 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// DEC R0
+///////////////////////////////////////////////////////////////
+
+uint8_t __dec_r0__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R0] -= 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// DEC R1
+///////////////////////////////////////////////////////////////
+
+uint8_t __dec_r1__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R1] -= 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// DEC R2
+///////////////////////////////////////////////////////////////
+
+uint8_t __dec_r2__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R2] -= 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// DEC R3
+///////////////////////////////////////////////////////////////
+
+uint8_t __dec_r3__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R3] -= 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// DEC R4
+///////////////////////////////////////////////////////////////
+
+uint8_t __dec_r4__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R4] -= 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// DEC R5
+///////////////////////////////////////////////////////////////
+
+uint8_t __dec_r5__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R5] -= 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// DEC R6
+///////////////////////////////////////////////////////////////
+
+uint8_t __dec_r6__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R6] -= 1;
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// DEC R7
+///////////////////////////////////////////////////////////////
+
+uint8_t __dec_r7__ (c51_cpu & cpu, ...)
+{
+    cpu.c51_memory.current_bank()[R7] -= 1;
     return 1;
 }
 
@@ -1203,6 +1327,7 @@ uint8_t instruction_arg_count(uint8_t instruction)
 
         case __INC_ADDR__:
 
+        case __DEC_ADDR__:
             return 1;
 
         case __MOV_DIRECT_DIRECT__:
@@ -1393,6 +1518,24 @@ c51_cpu::c51_cpu(const std::string &filename) : ihx_file(filename)
     __EMPLACE_OPERATION__(__INC_R7__, __inc_r7__);
 
     __EMPLACE_OPERATION__(__INC_DPTR__, __inc_dptr__);
+
+
+    __EMPLACE_OPERATION__(__DEC_A__, __dec_a__);
+
+    __EMPLACE_OPERATION__(__DEC_ADDR__, __dec_addr__);
+
+    __EMPLACE_OPERATION__(__DEC_AT_R0__, __dec_at_r0__);
+    __EMPLACE_OPERATION__(__DEC_AT_R1__, __dec_at_r1__);
+
+    __EMPLACE_OPERATION__(__DEC_R0__, __dec_r0__);
+    __EMPLACE_OPERATION__(__DEC_R1__, __dec_r1__);
+    __EMPLACE_OPERATION__(__DEC_R2__, __dec_r2__);
+    __EMPLACE_OPERATION__(__DEC_R3__, __dec_r3__);
+    __EMPLACE_OPERATION__(__DEC_R4__, __dec_r4__);
+    __EMPLACE_OPERATION__(__DEC_R5__, __dec_r5__);
+    __EMPLACE_OPERATION__(__DEC_R6__, __dec_r6__);
+    __EMPLACE_OPERATION__(__DEC_R7__, __dec_r7__);
+
 }
 
 void c51_cpu::clock_invocation()
