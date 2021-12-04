@@ -97,6 +97,13 @@ if (${DEC_ENABLED})
     add_sub_ins(dec "${DEC_INS_LIST}")
 endif ()
 
+if (${ADD_ENABLED})
+    set(ADD_INS_LIST
+            add_a_rn
+            )
+    add_sub_ins(add "${ADD_INS_LIST}")
+endif ()
+
 unset(CMAKE_USER_MAKE_RULES_OVERRIDE_ASM)
 unset(CMAKE_C_COMPILER)
 unset(CMAKE_ASM_COMPILER)

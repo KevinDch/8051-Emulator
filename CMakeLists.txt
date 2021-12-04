@@ -53,8 +53,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${EXTERNAL_LIBRARIES})
 # Unit tests
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     enable_testing()
-    default_marco(TEST_ENABLED_INSTRUCTIONS "DEC")
-                 # "NOP;MOV;MOVC;MOVX;ACALL;LJMP;LCALL;RET;AJMP;INC;DEC")
+    default_marco(TEST_ENABLED_INSTRUCTIONS "ADD")
+                 # "NOP;MOV;MOVC;MOVX;ACALL;LJMP;LCALL;RET;AJMP;INC;DEC;ADD")
 endif ()
 
 foreach(__INSTRUCTION__ ${TEST_ENABLED_INSTRUCTIONS})
@@ -163,6 +163,11 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
         c51_add_test(dec  c51_cpu_dec_addr         "C51 CPU test for instruction DEC addr")
         c51_add_test(dec  c51_cpu_dec_ri           "C51 CPU test for instruction DEC @Ri")
         c51_add_test(dec  c51_cpu_dec_rn           "C51 CPU test for instruction DEC Rn")
+    endif()
+
+    # ADD
+    if (${ADD_ENABLED})
+        c51_add_test(add  c51_cpu_add_a_rn         "C51 CPU test for instruction ADD A, Rn")
     endif()
 
 endif()

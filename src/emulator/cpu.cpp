@@ -1257,6 +1257,140 @@ uint8_t __dec_r7__ (c51_cpu & cpu, ...)
 
 ///////////////////////////////////////////////////////////////
 
+void __overflow_detector(c51_cpu & cpu, uint8_t num)
+{
+    uint64_t result = *cpu.c51_memory.acc_A + num;
+    _8bit_set_bit(cpu.c51_memory.prog_stat_wd_PSW, PSW_OV, result > 0xFF);
+}
+
+void __auxiliary_carry_detector(c51_cpu & cpu, uint8_t num)
+{
+    uint64_t result = *cpu.c51_memory.acc_A & 0x0F;
+    num &= 0x0F;
+    result += num;
+    _8bit_set_bit(cpu.c51_memory.prog_stat_wd_PSW, PSW_AC, result > 0x0F);
+}
+
+void __carry_detector(c51_cpu & cpu, uint8_t num)
+{
+    uint64_t result = *cpu.c51_memory.acc_A + num;
+    _8bit_set_bit(cpu.c51_memory.prog_stat_wd_PSW, PSW_OV, result > 0xFF);
+}
+
+///////////////////////////////////////////////////////////////
+/// ADD A, R0
+///////////////////////////////////////////////////////////////
+
+uint8_t __add_a_r0__ (c51_cpu & cpu, ...)
+{
+    __overflow_detector(cpu, cpu.c51_memory.current_bank()[R0]);
+    __auxiliary_carry_detector(cpu, cpu.c51_memory.current_bank()[R0]);
+    __carry_detector(cpu, cpu.c51_memory.current_bank()[R0]);
+
+    *cpu.c51_memory.acc_A += cpu.c51_memory.current_bank()[R0];
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// ADD A, R1
+///////////////////////////////////////////////////////////////
+
+uint8_t __add_a_r1__ (c51_cpu & cpu, ...)
+{
+    __overflow_detector(cpu, cpu.c51_memory.current_bank()[R1]);
+    __auxiliary_carry_detector(cpu, cpu.c51_memory.current_bank()[R1]);
+    __carry_detector(cpu, cpu.c51_memory.current_bank()[R1]);
+
+    *cpu.c51_memory.acc_A += cpu.c51_memory.current_bank()[R1];
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// ADD A, R2
+///////////////////////////////////////////////////////////////
+
+uint8_t __add_a_r2__ (c51_cpu & cpu, ...)
+{
+    __overflow_detector(cpu, cpu.c51_memory.current_bank()[R2]);
+    __auxiliary_carry_detector(cpu, cpu.c51_memory.current_bank()[R2]);
+    __carry_detector(cpu, cpu.c51_memory.current_bank()[R2]);
+
+    *cpu.c51_memory.acc_A += cpu.c51_memory.current_bank()[R2];
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// ADD A, R3
+///////////////////////////////////////////////////////////////
+
+uint8_t __add_a_r3__ (c51_cpu & cpu, ...)
+{
+    __overflow_detector(cpu, cpu.c51_memory.current_bank()[R3]);
+    __auxiliary_carry_detector(cpu, cpu.c51_memory.current_bank()[R3]);
+    __carry_detector(cpu, cpu.c51_memory.current_bank()[R3]);
+
+    *cpu.c51_memory.acc_A += cpu.c51_memory.current_bank()[R3];
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// ADD A, R4
+///////////////////////////////////////////////////////////////
+
+uint8_t __add_a_r4__ (c51_cpu & cpu, ...)
+{
+    __overflow_detector(cpu, cpu.c51_memory.current_bank()[R4]);
+    __auxiliary_carry_detector(cpu, cpu.c51_memory.current_bank()[R4]);
+    __carry_detector(cpu, cpu.c51_memory.current_bank()[R4]);
+
+    *cpu.c51_memory.acc_A += cpu.c51_memory.current_bank()[R4];
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// ADD A, R5
+///////////////////////////////////////////////////////////////
+
+uint8_t __add_a_r5__ (c51_cpu & cpu, ...)
+{
+    __overflow_detector(cpu, cpu.c51_memory.current_bank()[R5]);
+    __auxiliary_carry_detector(cpu, cpu.c51_memory.current_bank()[R5]);
+    __carry_detector(cpu, cpu.c51_memory.current_bank()[R5]);
+
+    *cpu.c51_memory.acc_A += cpu.c51_memory.current_bank()[R5];
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// ADD A, R6
+///////////////////////////////////////////////////////////////
+
+uint8_t __add_a_r6__ (c51_cpu & cpu, ...)
+{
+    __overflow_detector(cpu, cpu.c51_memory.current_bank()[R6]);
+    __auxiliary_carry_detector(cpu, cpu.c51_memory.current_bank()[R6]);
+    __carry_detector(cpu, cpu.c51_memory.current_bank()[R6]);
+
+    *cpu.c51_memory.acc_A += cpu.c51_memory.current_bank()[R6];
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+/// ADD A, R7
+///////////////////////////////////////////////////////////////
+
+uint8_t __add_a_r7__ (c51_cpu & cpu, ...)
+{
+    __overflow_detector(cpu, cpu.c51_memory.current_bank()[R7]);
+    __auxiliary_carry_detector(cpu, cpu.c51_memory.current_bank()[R7]);
+    __carry_detector(cpu, cpu.c51_memory.current_bank()[R7]);
+
+    *cpu.c51_memory.acc_A += cpu.c51_memory.current_bank()[R7];
+    return 1;
+}
+
+///////////////////////////////////////////////////////////////
+
 uint8_t instruction_arg_count(uint8_t instruction)
 {
     switch (instruction)
@@ -1361,12 +1495,13 @@ uint64_t c51_cpu::exec(by_exec_t before_exec, by_exec_t after_exec)
     }
 
     auto clock_count = instruction_set.at(instruction)(*this, args[0], args[1]);
-    cur_time += clock_count;
 
     for (uint64_t i = 0; i < clock_count; i++)
     {
         clock_invocation();
     }
+
+    cur_time += clock_count;
 
     if (after_exec)
     {
@@ -1536,9 +1671,18 @@ c51_cpu::c51_cpu(const std::string &filename) : ihx_file(filename)
     __EMPLACE_OPERATION__(__DEC_R6__, __dec_r6__);
     __EMPLACE_OPERATION__(__DEC_R7__, __dec_r7__);
 
+
+    __EMPLACE_OPERATION__(__ADD_A_R0__, __add_a_r0__);
+    __EMPLACE_OPERATION__(__ADD_A_R1__, __add_a_r1__);
+    __EMPLACE_OPERATION__(__ADD_A_R2__, __add_a_r2__);
+    __EMPLACE_OPERATION__(__ADD_A_R3__, __add_a_r3__);
+    __EMPLACE_OPERATION__(__ADD_A_R4__, __add_a_r4__);
+    __EMPLACE_OPERATION__(__ADD_A_R5__, __add_a_r5__);
+    __EMPLACE_OPERATION__(__ADD_A_R6__, __add_a_r6__);
+    __EMPLACE_OPERATION__(__ADD_A_R7__, __add_a_r7__);
 }
 
 void c51_cpu::clock_invocation()
 {
-
+    _8bit_set_bit(c51_memory.prog_stat_wd_PSW, PSW_P, *c51_memory.acc_A % 2 != 0);
 }

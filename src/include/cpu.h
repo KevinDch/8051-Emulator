@@ -176,6 +176,17 @@
 
 ///////////////////////////////////////
 
+#define __ADD_A_R0__            0x28
+#define __ADD_A_R1__            0x29
+#define __ADD_A_R2__            0x2A
+#define __ADD_A_R3__            0x2B
+#define __ADD_A_R4__            0x2C
+#define __ADD_A_R5__            0x2D
+#define __ADD_A_R6__            0x2E
+#define __ADD_A_R7__            0x2F
+
+///////////////////////////////////////
+
 class c51_cpu;
 
 typedef uint8_t (*ins_exec_t)(c51_cpu &, ...);
